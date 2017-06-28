@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Vacit.MainPage"
+    x:Class="Vacit.AddChild"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Vacit"
@@ -7,7 +7,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/800px_COLOURBOX2722751.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
 
     </Grid>
 </Page>
