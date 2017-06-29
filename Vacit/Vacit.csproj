@@ -95,10 +95,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Children.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Converter\DateConverter.cs" />
+    <Compile Include="Handler\ChildHandler.cs" />
+    <Compile Include="Model\Child.cs" />
     <Compile Include="Model\MonthToTakeVaccine.cs" />
-    <Compile Include="Model\Vaccines.cs" />
+    <Compile Include="Model\Vaccine.cs" />
     <Compile Include="Model\VaccinesTaken.cs" />
+    <Compile Include="Model\ChildrensListSingleton.cs" />
     <Compile Include="ViewModel\VacitViewModel.cs" />
     <Compile Include="View\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
@@ -138,7 +142,9 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Persistency\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

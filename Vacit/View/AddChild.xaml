@@ -1,16 +1,36 @@
 ﻿<Page
-    x:Class="Vacit.AddChild"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Vacit"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModel="using:Vacit.ViewModel"
+    x:Class="Vacit.AddChild"
     mc:Ignorable="d">
 
     <Grid>
+        <Grid.DataContext>
+            <ViewModel:VacitViewModel/>
+        </Grid.DataContext>
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/800px_COLOURBOX2722751.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
+        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="137" VerticalAlignment="Top" Width="259" Margin="0,46,46,0"/>
+        <ListView x:Name="ChildListView" HorizontalAlignment="Left" Height="473" Margin="624,188,0,0" VerticalAlignment="Top" Width="610">
+            <ListView.DataContext>
+                <ViewModel:VacitViewModel/>
+            </ListView.DataContext>
+        </ListView>
+        <TextBox x:Name="ChildName" HorizontalAlignment="Left" Margin="177,415,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="20" Foreground="White" Width="160"/>
+        <TextBlock x:Name="AddChildText" HorizontalAlignment="Left" Margin="60,364,0,0" TextWrapping="Wrap" Text="Tilføj barn" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <DatePicker HorizontalAlignment="Left" Margin="177,459,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="206" Date="{Binding DateOfBirth}"/>
+        <RadioButton x:Name="radioButton" Content="Pige" HorizontalAlignment="Left" Margin="182,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Command="{Binding GenderGirl}"/>
+        <RadioButton x:Name="radioButton_Copy" Content="Dreng" HorizontalAlignment="Left" Margin="312,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="60,417,0,0" TextWrapping="Wrap" Text="Fornavn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="60,462,0,0" TextWrapping="Wrap" Text="Fødselsdato" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="60,507,0,0" TextWrapping="Wrap" Text="Køn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <Button x:Name="button" Content="Tilføj" HorizontalAlignment="Left" Margin="60,556,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding CreateChildCommand}" FontSize="20" BorderBrush="Black"/>
+
 
     </Grid>
 </Page>

@@ -3,7 +3,7 @@ namespace Vacit.Model
     using System;
     using System.Collections.Generic;
 
-    public class Children
+    public class Child
     {
 
 
@@ -12,7 +12,7 @@ namespace Vacit.Model
         public DateTime DateOfBirth { get; set; }
         public bool GenderGirl { get; set; }
 
-        public Children(string name, DateTime dateOfBirth, bool genderGirl)
+        public Child(string name, DateTime dateOfBirth, bool genderGirl)
         {
             // mangler
             this.Name = name;

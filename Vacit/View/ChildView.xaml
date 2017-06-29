@@ -13,23 +13,23 @@
         <Grid.Background>
             <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/natur-børn.jpg"/>
         </Grid.Background>
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Olympia" VerticalAlignment="Top" FontSize="72" FontWeight="Thin" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="10,132,0,0" TextWrapping="Wrap" Text="23. maj 2017" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="10,100,0,0" TextWrapping="Wrap" Text="Olympia" VerticalAlignment="Top" FontSize="72" FontWeight="Thin" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="10,222,0,0" TextWrapping="Wrap" Text="23. maj 2017" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
         <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="137" VerticalAlignment="Top" Width="259" Margin="0,46,46,0"/>
         <Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="9,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
-        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="10,109,0,0" TextWrapping="Wrap" Text="Født" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="Født" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
         <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="10,0,0,332" TextWrapping="Wrap" Text="3 måneder" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}" VerticalAlignment="Bottom"/>
         <Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="239,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="469,0,606,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="0,0,376,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="0,0,146,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
         <Rectangle Fill="#FFB94CA6" Height="292" Margin="0,0,-84,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
-        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="10,201,0,0" TextWrapping="Wrap" Text="1 måned 7 dage" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="10,178,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="10,291,0,0" TextWrapping="Wrap" Text="1 måned 7 dage" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
+        <TextBox x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="10,268,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
 
         <ListView x:Name="listView" HorizontalAlignment="Left" Height="292" Margin="0,349,0,0" VerticalAlignment="Top" Width="1270"/>
-        <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="516,114,0,0" VerticalAlignment="Top" Width="120"/>
-        <AppBarButton x:Name="AddChildButton" HorizontalAlignment="Left" Icon="Add" Label="Tilføj Barn" Margin="0,660,0,0" VerticalAlignment="Top" Background="#CCFFFFFF">
+        <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="94,10,0,0" VerticalAlignment="Top" Width="181" Height="60"/>
+        <AppBarButton x:Name="AddChildButton" HorizontalAlignment="Left" Icon="Add" Label="Tilføj Barn" Margin="10,10,0,0" VerticalAlignment="Top" Background="#CCFFFFFF">
             <AppBarButton.DataContext>
                 <ViewModel:VacitViewModel/>
             </AppBarButton.DataContext>
