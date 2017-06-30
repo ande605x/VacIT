@@ -20,11 +20,31 @@ namespace Vacit
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class ChildView : Page
     {
-        public MainPage()
+        public ChildView()
         {
             this.InitializeComponent();
         }
+
+        private void CommandBar_Opening(object sender, object e)
+        {
+            CommandBar cb = sender as CommandBar;
+            if (cb != null) cb.Background.Opacity = 1.0;
+        }
+
+        private void CommandBar_Closing(object sender, object e)
+        {
+            CommandBar cb = sender as CommandBar;
+            if (cb != null) cb.Background.Opacity = 0.5;
+        }
+
+        private void ClickToAddChildView(object sender,RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(AddChildView));
+        }
+
+
+        
     }
 }

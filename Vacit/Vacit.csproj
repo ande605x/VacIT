@@ -104,6 +104,9 @@
     <Compile Include="Model\VaccinesTaken.cs" />
     <Compile Include="Model\ChildrensListSingleton.cs" />
     <Compile Include="ViewModel\VacitViewModel.cs" />
+    <Compile Include="View\AddChildView.xaml.cs">
+      <DependentUpon>AddChildView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
     </Compile>
@@ -133,7 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\AddChild.xaml">
+    <Page Include="View\AddChildView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
