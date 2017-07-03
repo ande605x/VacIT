@@ -21,15 +21,33 @@
         <Grid.Background>
             <ImageBrush ImageSource="ms-appx:///Assets/800px_COLOURBOX2722751.jpg" Stretch="UniformToFill"/>
         </Grid.Background>
-        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="137" VerticalAlignment="Top" Width="259" Margin="0,46,46,0"/>
-        <ListView x:Name="ChildListView" HorizontalAlignment="Left" Height="473" Margin="624,188,0,0" VerticalAlignment="Top" Width="610">
-            <ListView.DataContext>
-                <ViewModel:VacitViewModel/>
-            </ListView.DataContext>
+        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
+
+
+        <ListView x:Name="ChildListView" HorizontalAlignment="Left" Height="178" Margin="624,417,0,0" VerticalAlignment="Top" Width="398" ItemsSource="{Binding ChildrensListSingleton.ChildrensList}" Background="#33FFFFFF">
+            <Border Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="27*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Name}" Foreground="{Binding GenderColor}" FontSize="20"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Født" Foreground="White" FontSize="15"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DateOfBirth}" Foreground="White" FontSize="15"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <TextBox x:Name="ChildName" HorizontalAlignment="Left" Margin="177,415,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="20" Foreground="White" Width="160"/>
+
+
+        <TextBox x:Name="ChildName" HorizontalAlignment="Left" Margin="177,415,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="20" Foreground="White" Width="164"/>
         <TextBlock x:Name="AddChildText" HorizontalAlignment="Left" Margin="60,364,0,0" TextWrapping="Wrap" Text="Tilføj barn" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <DatePicker HorizontalAlignment="Left" Margin="177,459,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Width="206" Date="{Binding DateOfBirth}"/>
         <RadioButton x:Name="radioButton" Content="Pige" HorizontalAlignment="Left" Margin="182,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Command="{Binding GenderGirl}"/>
         <RadioButton x:Name="radioButton_Copy" Content="Dreng" HorizontalAlignment="Left" Margin="312,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="60,417,0,0" TextWrapping="Wrap" Text="Fornavn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
@@ -37,6 +55,8 @@
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="60,507,0,0" TextWrapping="Wrap" Text="Køn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
         <Button x:Name="button" Content="Tilføj" HorizontalAlignment="Left" Margin="60,556,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding CreateChildCommand}" FontSize="20" BorderBrush="Black"/>
         <AppBarButton x:Name="toChildViewButton" HorizontalAlignment="Left" Icon="Cancel" Label="Annuller" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" Click="ClickToChildView"/>
+        <TextBlock x:Name="AddChildText_Copy" HorizontalAlignment="Left" Margin="635,364,0,0" TextWrapping="Wrap" Text="Børneliste" VerticalAlignment="Top" Foreground="White" FontSize="36" SelectionChanged="AddChildText_Copy_SelectionChanged"/>
+        <CalendarDatePicker  HorizontalAlignment="Left" Margin="177,462,0,0" VerticalAlignment="Top" PlaceholderText="Vælg fødselsdato" DateFormat="{}{day.integer}/{month.integer}/{year.full}" FirstDayOfWeek="Monday" FontSize="20" Foreground="White" DisplayMode="Decade"/>
 
 
     </Grid>

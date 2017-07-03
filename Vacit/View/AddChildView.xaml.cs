@@ -32,6 +32,9 @@ namespace Vacit
             this.Frame.Navigate(typeof(ChildView));
         }
 
+        private void AddChildText_Copy_SelectionChanged(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

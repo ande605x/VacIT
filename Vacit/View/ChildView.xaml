@@ -17,14 +17,14 @@
         </TransitionCollection>
     </Page.Transitions>
 
-    <Page.TopAppBar>
-        <AppBar IsOpen="True">
+    <Page.BottomAppBar>
+        <AppBar IsOpen="True" Background="#33000000" ClosedDisplayMode="Compact">
             <StackPanel Orientation="Horizontal">
                 <AppBarButton x:Name="AddChildButton" HorizontalAlignment="Left" Icon="Add" Label="Tilføj Barn" Background="#CCFFFFFF" Click="ClickToAddChildView"/>
 
             </StackPanel>
         </AppBar>
-    </Page.TopAppBar>
+    </Page.BottomAppBar>
 
 
     <Grid>
@@ -37,7 +37,7 @@
 
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="10,8,0,0" TextWrapping="Wrap" Text="Olympia" VerticalAlignment="Top" FontSize="72" FontWeight="Thin" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}"/>
         <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="10,130,0,0" TextWrapping="Wrap" Text="23. maj 2017" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
-        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="137" VerticalAlignment="Top" Width="259" Margin="0,46,46,0"/>
+        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
         <Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="9,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
         <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="Født" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
         <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="10,0,0,332" TextWrapping="Wrap" Text="3 måneder" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}" VerticalAlignment="Bottom"/>
@@ -52,8 +52,8 @@
         <ListView x:Name="listView" HorizontalAlignment="Left" Height="292" Margin="0,349,0,0" VerticalAlignment="Top" Width="1270"/>
         <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="431,141,0,0" VerticalAlignment="Top" Width="181" Height="60"/>
 
-        
-        
+
+
     </Grid>
 
 
