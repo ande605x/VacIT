@@ -21,7 +21,7 @@ namespace Vacit.Persistency
 
 
 
-        //GET Child
+        //GET Children
         public static ObservableCollection<Child> LoadChildrenFromJsonAsync()
         {
             try
@@ -42,7 +42,7 @@ namespace Vacit.Persistency
             }
             catch (Exception e)
             {
-                ShowMessages.ShowPopUp("Netværksfejl: " + e.Message);
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
                 
             }
             return null; // If error, return null
@@ -71,7 +71,7 @@ namespace Vacit.Persistency
             }
             catch (Exception e)
             {
-                ShowMessages.ShowPopUp("Netværksfejl: " + e.Message);
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Vacit.Persistency
             }
             catch (Exception e)
             {
-                ShowMessages.ShowPopUp("Netværksfejl: " + e.Message);
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
             }
         }
 
@@ -131,15 +131,95 @@ namespace Vacit.Persistency
             }
             catch (Exception e)
             {
-                ShowMessages.ShowPopUp("Netværksfejl: " + e.Message);
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const string urlVaccines = "api/vaccines/"; 
+
+        //GET Vaccines
+        public static ObservableCollection<Vaccine> LoadVaccinesFromJsonAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.GetAsync(urlVaccines).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var vaccinesList = response.Content.ReadAsAsync<ObservableCollection<Vaccine>>().Result;
+                        return vaccinesList;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+
+            }
+            return null; // If error, return null
+        }
+
+
+
+
+
+
+
+
+
+
         
+        const string urlVaccinesWithMonth = "api/VaccinesWithMonthsViews/";
+
+        //GET VaccinesWithMonths
+        public static ObservableCollection<VaccinesWithMonths> LoadVaccinesWithMonthsFromJsonAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.GetAsync(urlVaccinesWithMonth).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var vaccinesList = response.Content.ReadAsAsync<ObservableCollection<VaccinesWithMonths>>().Result;
+                        return vaccinesList;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+
+            }
+            return null; // If error, return null
+        }
 
 
-            
 
-   
+
 
 
 

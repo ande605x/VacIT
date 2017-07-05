@@ -36,5 +36,16 @@ namespace Vacit.Handler
         }
 
 
+        public void DeleteChild()
+        {
+            VacitViewModel.ChildrensListSingleton.RemoveChild(VacitViewModel.SelectedChild);
+        }
+
+        public void UpdateChild()
+        {
+            VacitViewModel.ChildrensListSingleton.UpdateChild(VacitViewModel.SelectedChild);
+        }
+
+
     }
 }

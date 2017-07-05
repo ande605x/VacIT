@@ -8,12 +8,7 @@
     x:Class="Vacit.AddChildView"
     mc:Ignorable="d">
 
-    <Page.Transitions>
-        <TransitionCollection>
-            <PaneThemeTransition Edge="Right" />
-        </TransitionCollection>
-    </Page.Transitions>
-
+  
     <Grid>
         <Grid.DataContext>
             <ViewModel:VacitViewModel/>
@@ -24,7 +19,7 @@
         <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
 
 
-        <ListView x:Name="ChildListView" HorizontalAlignment="Left" Height="178" Margin="624,417,0,0" VerticalAlignment="Top" Width="398" ItemsSource="{Binding ChildrensListSingleton.ChildrensList}" Background="#33FFFFFF">
+        <ListView x:Name="ChildListView" HorizontalAlignment="Left" Height="178" Margin="624,417,0,0" VerticalAlignment="Top" Width="398" ItemsSource="{Binding ChildrensListSingleton.ChildrensList}" Background="#33FFFFFF" SelectedItem="{Binding SelectedChild, Mode=TwoWay}">
             <Border Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -54,9 +49,9 @@
         <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="60,462,0,0" TextWrapping="Wrap" Text="Fødselsdato" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="60,507,0,0" TextWrapping="Wrap" Text="Køn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
         <Button x:Name="button" Content="Tilføj" HorizontalAlignment="Left" Margin="60,556,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding CreateChildCommand}" FontSize="20" BorderBrush="Black"/>
-        <AppBarButton x:Name="toChildViewButton" HorizontalAlignment="Left" Icon="Cancel" Label="Annuller" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" Click="ClickToChildView"/>
         <TextBlock x:Name="AddChildText_Copy" HorizontalAlignment="Left" Margin="635,364,0,0" TextWrapping="Wrap" Text="Børneliste" VerticalAlignment="Top" Foreground="White" FontSize="36" SelectionChanged="AddChildText_Copy_SelectionChanged"/>
         <CalendarDatePicker  HorizontalAlignment="Left" Margin="177,462,0,0" VerticalAlignment="Top" PlaceholderText="Vælg fødselsdato" DateFormat="{}{day.integer}/{month.integer}/{year.full}" FirstDayOfWeek="Monday" FontSize="20" Foreground="White" DisplayMode="Decade"/>
+        <Button x:Name="DeleteButton" Content="Slet valgte" HorizontalAlignment="Left" Margin="630,616,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding DeleteChildCommand}" FontSize="20" BorderBrush="Black" Click="button_Copy_Click"/>
 
 
     </Grid>

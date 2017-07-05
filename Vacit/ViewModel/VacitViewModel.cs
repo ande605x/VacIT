@@ -16,6 +16,7 @@ namespace Vacit.ViewModel
 
         // Singleton property
         public ChildrensListSingleton ChildrensListSingleton { get; set; }
+        public VaccinesListSingleton VaccinesListSingleton { get; set; }
 
 
         //PropertyChanged
@@ -29,7 +30,7 @@ namespace Vacit.ViewModel
 
 
         //Add Child Properties
-        private int childID;
+        private int childID;              // HVOR FÅR DEN ID FRA??????
         public int ChildID
         {
             get { return childID; }
@@ -67,10 +68,36 @@ namespace Vacit.ViewModel
             set { createChildCommand = value; }
         }
 
+        private ICommand deleteChildCommand;
+        public ICommand DeleteChildCommand
+        {
+            get { return deleteChildCommand; }
+            set { deleteChildCommand = value; }
+        }
+
+        private ICommand updateChildCommand;
+        public ICommand UpdateChildCommand
+        {
+            get { return updateChildCommand; }
+            set { updateChildCommand = value; }
+        }
+
+
+
+        private Child selectedChild;
+        public Child SelectedChild
+        {
+            get { return selectedChild; }
+            set { selectedChild = value; OnPropertyChanged(nameof(SelectedChild)); }
+        }
+
+
+
 
 
         // Handler property
         public ChildHandler ChildHandler { get; set; }
+        public VaccineHandler VaccineHandler { get; set; }
 
 
 
@@ -79,12 +106,19 @@ namespace Vacit.ViewModel
         public VacitViewModel()
         {
             ChildrensListSingleton = ChildrensListSingleton.Instance;
+            VaccinesListSingleton = VaccinesListSingleton.Instance;
+
+            ChildHandler = new Handler.ChildHandler(this);
+            VaccineHandler = new Handler.VaccineHandler(this);
 
             DateTime dt = System.DateTime.Now; // Inilizing dateOfBirth to now as a standard 
             dateOfBirth = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, new TimeSpan());
 
-            ChildHandler = new Handler.ChildHandler(this);
+           
+
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
+            DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild);
+            UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);
 
         }
     }

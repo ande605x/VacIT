@@ -15,31 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Vacit
+namespace Vacit.View
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class AddChildView : Page
+    public sealed partial class VaccinesInfoView : Page
     {
-        public AddChildView()
+        public VaccinesInfoView()
         {
             this.InitializeComponent();
-        }
-
-        private void ClickToChildView(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(MenuPage));
-        }
-
-        private void AddChildText_Copy_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void button_Copy_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

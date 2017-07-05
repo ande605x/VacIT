@@ -11,20 +11,8 @@
 
 
 
-    <Page.Transitions>
-        <TransitionCollection>
-            <EdgeUIThemeTransition Edge="Left" />
-        </TransitionCollection>
-    </Page.Transitions>
+    
 
-    <Page.BottomAppBar>
-        <AppBar IsOpen="True" Background="#33000000" ClosedDisplayMode="Compact">
-            <StackPanel Orientation="Horizontal">
-                <AppBarButton x:Name="AddChildButton" HorizontalAlignment="Left" Icon="Add" Label="Tilføj Barn" Background="#CCFFFFFF" Click="ClickToAddChildView"/>
-
-            </StackPanel>
-        </AppBar>
-    </Page.BottomAppBar>
 
 
     <Grid>
@@ -49,7 +37,14 @@
         <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="1 måned 7 dage" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
         <TextBox x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="10,176,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
 
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="292" Margin="0,349,0,0" VerticalAlignment="Top" Width="1270"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="292" Margin="0,349,0,0" VerticalAlignment="Top" Width="1270" ItemsSource="{Binding VaccinesListSingleton.VaccinesList}"/>
+
+
+
+
+
+
+
         <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="431,141,0,0" VerticalAlignment="Top" Width="181" Height="60"/>
 
 

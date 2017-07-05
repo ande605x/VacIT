@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace Vacit
 {
@@ -27,13 +27,11 @@ namespace Vacit
             this.InitializeComponent();
         }
 
- 
-        private void ClickToAddChildView(object sender,RoutedEventArgs e)
+
+        private void ClickToAddChildView(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(AddChildView));
         }
 
-
-        
     }
 }
