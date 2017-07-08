@@ -33,5 +33,18 @@ namespace Vacit
             this.Frame.Navigate(typeof(AddChildView));
         }
 
+        private void NameComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {           
+            //var combo = (ComboBox)sender;
+            
+            //var item = (ComboBoxItem)combo.SelectedItem;
+            //ChildNameHeadline.Text = item.Content.ToString();
+            
+            //var item = combo.SelectedItem;
+            //ChildNameHeadline.Text = item.ToString();
+            
+            
+
+        }
     }
 }

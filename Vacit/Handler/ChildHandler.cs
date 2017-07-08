@@ -55,18 +55,6 @@ namespace Vacit.Handler
             }
 
 
-            //foreach (var item in VaccinesListSingleton.Instance.VaccinesWithMonthList)
-            //{
-            //    VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-            //        VacitViewModel.NextChildIDforView,
-            //        item.)
-
-            //    VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
-            //}
-
-
-
-
             // Increment next ChildID and make it ready for next post
             VacitViewModel.NextChildIDforView++;
 
@@ -77,6 +65,9 @@ namespace Vacit.Handler
         public void DeleteChild()
         {
             VacitViewModel.ChildrensListSingleton.RemoveChild(VacitViewModel.SelectedChild);
+
+            // Husk slet vaccinestaken
+
         }
 
         public void UpdateChild()

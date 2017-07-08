@@ -29,6 +29,7 @@ namespace Vacit.ViewModel
 
 
 
+
         //Add Child Properties
         private int childID;              // HVOR FÅR DEN ID FRA??????
         public int ChildID
@@ -50,6 +51,10 @@ namespace Vacit.ViewModel
             get { return dateOfBirth; }
             set { dateOfBirth = value; }
         }
+
+     
+       
+
 
         private bool genderGirl;
         public bool GenderGirl
@@ -130,7 +135,7 @@ namespace Vacit.ViewModel
             DateTime dt = System.DateTime.Now; // Inilizing dateOfBirth to now as a standard 
             dateOfBirth = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, new TimeSpan());
 
-            
+            SelectedChild = ChildrensListSingleton.ChildrensList.First(); //Vælger barn nr 1 i listen til start
            
 
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);

@@ -13,7 +13,15 @@ namespace Vacit.Model
         public bool GenderGirl { get; set; }
 
 
+
+
         public string GenderColor { get; set; }
+
+        public string DateOfBirthStringDanish { get; set; }
+
+        public string AgeStringDanish { get; set; }
+
+       
 
 
         public Child(int childID,string name, DateTime dateOfBirth, bool genderGirl)
@@ -25,6 +33,10 @@ namespace Vacit.Model
             this.GenderGirl = genderGirl;
 
             if (genderGirl) GenderColor = "#FFB94CA6"; else GenderColor = "#FF006C95";     //could also write GenderColor="Blue"
+
+            DateOfBirthStringDanish = Vacit.Converter.DateConverter.DateStringDanish(dateOfBirth);
+
+            AgeStringDanish = Vacit.Converter.DateConverter.AgeToStringDanish(dateOfBirth);
         }
     }
 }
