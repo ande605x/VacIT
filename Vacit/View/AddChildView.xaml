@@ -33,6 +33,7 @@
                             <ColumnDefinition Width="27*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Name}" Foreground="{Binding GenderColor}" FontSize="20"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ChildID}" Foreground="{Binding GenderColor}" FontSize="25"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Født" Foreground="White" FontSize="15"/>
                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding DateOfBirth}" Foreground="White" FontSize="15"/>
                     </Grid>
@@ -41,17 +42,20 @@
         </ListView>
 
 
-        <TextBox x:Name="ChildName" HorizontalAlignment="Left" Margin="177,415,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="20" Foreground="White" Width="164"/>
         <TextBlock x:Name="AddChildText" HorizontalAlignment="Left" Margin="60,364,0,0" TextWrapping="Wrap" Text="Tilføj barn" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <RadioButton x:Name="radioButton" Content="Pige" HorizontalAlignment="Left" Margin="182,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Command="{Binding GenderGirl}"/>
-        <RadioButton x:Name="radioButton_Copy" Content="Dreng" HorizontalAlignment="Left" Margin="312,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="60,417,0,0" TextWrapping="Wrap" Text="Fornavn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="60,462,0,0" TextWrapping="Wrap" Text="Fødselsdato" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-        <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="60,507,0,0" TextWrapping="Wrap" Text="Køn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
-        <Button x:Name="button" Content="Tilføj" HorizontalAlignment="Left" Margin="60,556,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding CreateChildCommand}" FontSize="20" BorderBrush="Black"/>
-        <TextBlock x:Name="AddChildText_Copy" HorizontalAlignment="Left" Margin="635,364,0,0" TextWrapping="Wrap" Text="Børneliste" VerticalAlignment="Top" Foreground="White" FontSize="36" SelectionChanged="AddChildText_Copy_SelectionChanged"/>
-        <CalendarDatePicker  HorizontalAlignment="Left" Margin="177,462,0,0" VerticalAlignment="Top" PlaceholderText="Vælg fødselsdato" DateFormat="{}{day.integer}/{month.integer}/{year.full}" FirstDayOfWeek="Monday" FontSize="20" Foreground="White" DisplayMode="Decade"/>
+        <TextBlock x:Name="NameText" HorizontalAlignment="Left" Margin="60,417,0,0" TextWrapping="Wrap" Text="Fornavn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <TextBox x:Name="ChildName" HorizontalAlignment="Left" Margin="177,415,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="20" Foreground="White" Width="164"/>
+        <TextBlock x:Name="BirthDate" HorizontalAlignment="Left" Margin="60,462,0,0" TextWrapping="Wrap" Text="Fødselsdato" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <CalendarDatePicker x:Name="DateOfBirthPicker" Date="{Binding DateOfBirth}" HorizontalAlignment="Left" Margin="177,462,0,0" VerticalAlignment="Top" PlaceholderText="Vælg fødselsdato" DateFormat="{}{day.integer}/{month.integer}/{year.full}" FirstDayOfWeek="Monday" FontSize="20" Foreground="White" DisplayMode="Decade"/>
+        <TextBlock x:Name="Gender" HorizontalAlignment="Left" Margin="60,507,0,0" TextWrapping="Wrap" Text="Køn" VerticalAlignment="Top" Foreground="White" FontSize="20"/>
+        <RadioButton x:Name="radioButton_Girl" Content="Pige" GroupName="GenderGroup" Checked="RadioButton_Checked" HorizontalAlignment="Left" Margin="182,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" Command="{Binding GenderGirl}"/>
+        <RadioButton x:Name="radioButton_Boy" Content="Dreng" GroupName="GenderGroup" Checked="RadioButton_Checked"  HorizontalAlignment="Left" Margin="312,506,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="Transparent" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Left"/>
+        <Button x:Name="AddButton" Content="Tilføj" HorizontalAlignment="Left" Margin="60,556,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding CreateChildCommand}" FontSize="20" BorderBrush="Black"/>
+
+        <TextBlock x:Name="ChildList" HorizontalAlignment="Left" Margin="635,364,0,0" TextWrapping="Wrap" Text="Børneliste" VerticalAlignment="Top" Foreground="White" FontSize="36" SelectionChanged="AddChildText_Copy_SelectionChanged"/>
         <Button x:Name="DeleteButton" Content="Slet valgte" HorizontalAlignment="Left" Margin="630,616,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding DeleteChildCommand}" FontSize="20" BorderBrush="Black" Click="button_Copy_Click"/>
+
+        <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="792,117,0,0" TextWrapping="Wrap" Text="{Binding NextChildIDforView}" VerticalAlignment="Top"/>
 
 
     </Grid>

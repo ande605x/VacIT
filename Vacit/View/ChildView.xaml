@@ -11,7 +11,7 @@
 
 
 
-    
+
 
 
 
@@ -45,8 +45,31 @@
 
 
 
-        <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="431,141,0,0" VerticalAlignment="Top" Width="181" Height="60"/>
+        <ComboBox x:Name="NameComboBox" HorizontalAlignment="Left" Margin="22,263,0,0" VerticalAlignment="Top" Width="181" Height="60"/>
 
+
+
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="186" Margin="554,112,0,0" VerticalAlignment="Top" Width="580" ItemsSource="{Binding VaccinesListSingleton.VaccinesTakenList}">
+        <Border Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="27*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChildID}" FontSize="20"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding VacMonthID}" FontSize="25"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Vaccine taget? " Foreground="White" FontSize="15"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VacTaken}" Foreground="White" FontSize="15"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
 
     </Grid>

@@ -25,6 +25,8 @@ namespace Vacit
         public AddChildView()
         {
             this.InitializeComponent();
+
+            DateOfBirthPicker.Date = System.DateTime.Now; // Setting standard for 
         }
 
         private void ClickToChildView(object sender, RoutedEventArgs e)
@@ -40,6 +42,14 @@ namespace Vacit
         private void button_Copy_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            if ((bool)radioButton_Girl.IsChecked)
+            { // DO SOMETHING }
+
+            }
         }
     }
 }

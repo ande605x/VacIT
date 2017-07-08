@@ -39,6 +39,24 @@ namespace Vacit.Model
 
 
 
+
+
+
+        private int nextChildID;
+
+        public int NextChildID
+        {
+            get { return nextChildID; }
+            set { nextChildID = value; }
+        }
+
+
+
+
+
+
+
+
         //Constructor
         public ChildrensListSingleton()
         {
@@ -51,6 +69,16 @@ namespace Vacit.Model
 
             // Get list from database from server
             GetChildren();
+
+
+            //nextChildID= childrensList.Last().ChildID+1;
+
+            // Find ChildID for the next new child (last ChildID+1)  (This only run once when app opens)
+            foreach (var i in childrensList)
+            {
+                nextChildID = i.ChildID;
+            }
+            nextChildID++;
 
         }
 
@@ -67,6 +95,11 @@ namespace Vacit.Model
         {
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
+            nextChildID++;                                     // Increment nextChildID
+
+            // Create rows in VaccinesTaken for the new child
+        
+
         }
 
         public void RemoveChild(Child childToRemove)

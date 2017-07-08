@@ -42,6 +42,25 @@ namespace Vacit.Model
 
 
 
+        private ObservableCollection<MonthToTakeVaccine> monthToTakeVaccinesList;
+
+        public ObservableCollection<MonthToTakeVaccine> MonthToTakeVaccinesList
+        {
+            get { return monthToTakeVaccinesList; }
+            set { monthToTakeVaccinesList = value; }
+        }
+
+
+        private ObservableCollection<VaccinesTaken> vaccinesTakenList;
+
+        public ObservableCollection<VaccinesTaken> VaccinesTakenList
+        {
+            get { return vaccinesTakenList; }
+            set { vaccinesTakenList = value; }
+        }
+
+
+
         public PersistencyService ps;
 
 
@@ -51,9 +70,11 @@ namespace Vacit.Model
         {
             VaccinesList = new ObservableCollection<Vaccine>();
             VaccinesWithMonthList = new ObservableCollection<VaccinesWithMonths>();
+            MonthToTakeVaccinesList = new ObservableCollection<MonthToTakeVaccine>();
+            VaccinesTakenList = new ObservableCollection<VaccinesTaken>();
             ps = new PersistencyService();
 
-            // Get list from database from server
+            // Get list from serverdatabase
             GetVaccines();
 
         }
@@ -64,7 +85,11 @@ namespace Vacit.Model
         public void GetVaccines()
         {
             vaccinesList = PersistencyService.LoadVaccinesFromJsonAsync();   // SKAL BEGGE BRUGES????
-            vaccinesWithMonthList = PersistencyService.LoadVaccinesWithMonthsFromJsonAsync();        }
+            vaccinesWithMonthList = PersistencyService.LoadVaccinesWithMonthsFromJsonAsync();
+
+            monthToTakeVaccinesList = PersistencyService.LoadMonthToTakeVaccineFromJsonAsync();
+            vaccinesTakenList = PersistencyService.LoadVaccinesTakenFromJsonAsync();
+        }
 
         
 

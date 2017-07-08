@@ -94,6 +94,19 @@ namespace Vacit.ViewModel
 
 
 
+        //MIDLERTIDIG
+        private int nextChildIDforView;
+
+        public int NextChildIDforView
+        {
+            get { return nextChildIDforView; }
+            set { nextChildIDforView = value; OnPropertyChanged(nameof(Name)); }
+        }
+
+
+
+
+
 
         // Handler property
         public ChildHandler ChildHandler { get; set; }
@@ -108,17 +121,23 @@ namespace Vacit.ViewModel
             ChildrensListSingleton = ChildrensListSingleton.Instance;
             VaccinesListSingleton = VaccinesListSingleton.Instance;
 
+            NextChildIDforView = ChildrensListSingleton.NextChildID;
+            //ChildID = ChildrensListSingleton.NextChildID;
+
             ChildHandler = new Handler.ChildHandler(this);
             VaccineHandler = new Handler.VaccineHandler(this);
 
             DateTime dt = System.DateTime.Now; // Inilizing dateOfBirth to now as a standard 
             dateOfBirth = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, new TimeSpan());
 
+            
            
 
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
             DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild);
             UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);
+
+
 
         }
     }

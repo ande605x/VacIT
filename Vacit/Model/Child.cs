@@ -16,9 +16,10 @@ namespace Vacit.Model
         public string GenderColor { get; set; }
 
 
-        public Child(string name, DateTime dateOfBirth, bool genderGirl)
+        public Child(int childID,string name, DateTime dateOfBirth, bool genderGirl)
         {
             // mangler id ???
+            this.ChildID = childID;
             this.Name = name;
             this.DateOfBirth = dateOfBirth;
             this.GenderGirl = genderGirl;

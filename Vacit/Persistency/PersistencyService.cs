@@ -220,8 +220,69 @@ namespace Vacit.Persistency
 
 
 
+        const string urlVaccinesTaken = "api/VaccinesTakens/";
+
+        //GET VaccinesTaken
+        public static ObservableCollection<VaccinesTaken> LoadVaccinesTakenFromJsonAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.GetAsync(urlVaccinesTaken).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var vaccinesTakenList = response.Content.ReadAsAsync<ObservableCollection<VaccinesTaken>>().Result;
+                        return vaccinesTakenList;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+
+            }
+            return null; // If error, return null
+        }
 
 
+
+
+
+
+        
+       const string urlMonthToTakeVaccines = "api/MonthToTakeVaccines/";
+
+        //GET VaccinesTaken
+        public static ObservableCollection<MonthToTakeVaccine> LoadMonthToTakeVaccineFromJsonAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.GetAsync(urlMonthToTakeVaccines).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var monthToTakeVaccinesList = response.Content.ReadAsAsync<ObservableCollection<MonthToTakeVaccine>>().Result;
+                        return monthToTakeVaccinesList;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+
+            }
+            return null; // If error, return null
+        }
 
 
 

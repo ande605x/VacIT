@@ -24,16 +24,54 @@ namespace Vacit.Handler
         // HUSK TRY CATCH
         public void CreateChild()
         {
-            // create new child object
+
+            // Create new child object
             Child newChild = new Child(
-                                                //ChildID is automaticly made by database 
+                VacitViewModel.NextChildIDforView,
+                //ChildID is automaticly made by database on server 
+                //VIRKER IKKE - ChildID locally can needs to have the same number as on the server
                 VacitViewModel.Name,
                 DateConverter.DateTimeOffset_SetToDateTime(VacitViewModel.DateOfBirth),
                 VacitViewModel.GenderGirl);
-            
-            // add to list
+
+            // Add to list             
             VacitViewModel.ChildrensListSingleton.AddChild(newChild);
-        }
+
+
+
+
+
+
+
+            // Create rows in VaccinesTaken for the new child
+
+            foreach(var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+            {
+                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                    VacitViewModel.NextChildIDforView,
+                    item.VacMonthID);
+
+                VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+            }
+
+
+            //foreach (var item in VaccinesListSingleton.Instance.VaccinesWithMonthList)
+            //{
+            //    VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+            //        VacitViewModel.NextChildIDforView,
+            //        item.)
+
+            //    VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+            //}
+
+
+
+
+            // Increment next ChildID and make it ready for next post
+            VacitViewModel.NextChildIDforView++;
+
+
+        } 
 
 
         public void DeleteChild()
