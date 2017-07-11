@@ -22,5 +22,11 @@ namespace Vacit.Handler
 
    // ER DENNE KLASSE NØDVENDIG NÅR JEG KUN SKAL GET????
 
+
+
+
+
+        
+
     }
 }

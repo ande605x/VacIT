@@ -100,9 +100,11 @@
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Handler\ChildHandler.cs" />
     <Compile Include="Handler\VaccineHandler.cs" />
+    <Compile Include="Model\CardList.cs" />
     <Compile Include="Model\Child.cs" />
     <Compile Include="Model\MonthToTakeVaccine.cs" />
     <Compile Include="Model\Vaccine.cs" />
+    <Compile Include="Model\VaccinesCard.cs" />
     <Compile Include="Model\VaccinesListSingleton.cs" />
     <Compile Include="Model\VaccinesTaken.cs" />
     <Compile Include="Model\ChildrensListSingleton.cs" />
@@ -131,6 +133,27 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\800px_COLOURBOX2722751.jpg" />
+    <Content Include="Assets\Boy1.png" />
+    <Content Include="Assets\Boy2.png" />
+    <Content Include="Assets\Boy3.png" />
+    <Content Include="Assets\Boy4.png" />
+    <Content Include="Assets\Boy5.png" />
+    <Content Include="Assets\Boy6.png" />
+    <Content Include="Assets\Boy7.png" />
+    <Content Include="Assets\Child1.png" />
+    <Content Include="Assets\Child2.png" />
+    <Content Include="Assets\Child3.png" />
+    <Content Include="Assets\Child4.png" />
+    <Content Include="Assets\Child5.png" />
+    <Content Include="Assets\Child6.png" />
+    <Content Include="Assets\Child7.png" />
+    <Content Include="Assets\Girl1.png" />
+    <Content Include="Assets\Girl2.png" />
+    <Content Include="Assets\Girl3.png" />
+    <Content Include="Assets\Girl4.png" />
+    <Content Include="Assets\Girl5.png" />
+    <Content Include="Assets\Girl6.png" />
+    <Content Include="Assets\Girl7.png" />
     <Content Include="Assets\natur-børn.jpg" />
     <Content Include="Assets\RegionSjællandLogoTrans.png" />
     <Content Include="Properties\Default.rd.xml" />

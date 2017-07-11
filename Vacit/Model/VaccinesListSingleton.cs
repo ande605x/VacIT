@@ -61,6 +61,18 @@ namespace Vacit.Model
 
 
 
+        private ObservableCollection<VaccinesCard> vaccinesCardList;
+
+        public ObservableCollection<VaccinesCard> VaccinesCardList
+        {
+            get { return vaccinesCardList; }
+            set { vaccinesCardList = value; }
+        }
+
+
+
+
+
         public PersistencyService ps;
 
 
@@ -72,6 +84,7 @@ namespace Vacit.Model
             VaccinesWithMonthList = new ObservableCollection<VaccinesWithMonths>();
             MonthToTakeVaccinesList = new ObservableCollection<MonthToTakeVaccine>();
             VaccinesTakenList = new ObservableCollection<VaccinesTaken>();
+            VaccinesCardList = new ObservableCollection<VaccinesCard>();
             ps = new PersistencyService();
 
             // Get list from serverdatabase
@@ -91,6 +104,8 @@ namespace Vacit.Model
             vaccinesTakenList = PersistencyService.LoadVaccinesTakenFromJsonAsync();
         }
 
+
+        
         
 
     }

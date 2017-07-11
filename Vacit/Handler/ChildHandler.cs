@@ -25,6 +25,19 @@ namespace Vacit.Handler
         public void CreateChild()
         {
 
+            // Create rows in VaccinesTaken for the new child
+
+            foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+            {
+                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                    VacitViewModel.NextChildIDforView,
+                    item.VacMonthID);
+
+                VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+            }
+
+
+
             // Create new child object
             Child newChild = new Child(
                 VacitViewModel.NextChildIDforView,
@@ -37,22 +50,6 @@ namespace Vacit.Handler
             // Add to list             
             VacitViewModel.ChildrensListSingleton.AddChild(newChild);
 
-
-
-
-
-
-
-            // Create rows in VaccinesTaken for the new child
-
-            foreach(var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
-            {
-                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-                    VacitViewModel.NextChildIDforView,
-                    item.VacMonthID);
-
-                VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
-            }
 
 
             // Increment next ChildID and make it ready for next post

@@ -98,6 +98,18 @@ namespace Vacit.ViewModel
 
 
 
+        private VaccinesCard selectedVaccineCard;
+
+        public VaccinesCard SelectedVaccineCard
+        {
+            get { return selectedVaccineCard; }
+            set { selectedVaccineCard = value;
+                Common.ShowMessages.ShowPopUp("Valgt vaccinecard: "+value.VaccineName);
+                OnPropertyChanged(nameof(SelectedVaccineCard)); }
+        }
+
+
+
 
         //MIDLERTIDIG
         private int nextChildIDforView;
@@ -110,7 +122,7 @@ namespace Vacit.ViewModel
 
 
 
-
+        
 
 
         // Handler property

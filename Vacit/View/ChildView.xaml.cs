@@ -46,5 +46,10 @@ namespace Vacit
             
 
         }
+
+        private void textBox1_Copy1_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

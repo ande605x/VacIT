@@ -23,21 +23,47 @@
             <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/natur-børn.jpg"/>
         </Grid.Background>
 
-        <TextBlock x:Name="ChildNameHeadline" HorizontalAlignment="Left" Margin="1159,295,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="16" FontWeight="Thin" Foreground="White"/>
-        <TextBlock x:Name="BornTextBlock" HorizontalAlignment="Left" Margin="22,136,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.DateOfBirthStringDanish}" VerticalAlignment="Top" FontWeight="Thin" Foreground="White" FontSize="24"/>
+        <TextBlock x:Name="ChildNameHeadline" HorizontalAlignment="Left" Margin="155,296,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.Name, Mode=TwoWay}" VerticalAlignment="Top" FontSize="36" FontWeight="Thin" Foreground="White" RenderTransformOrigin="0.69,0.81"/>
+        <TextBlock x:Name="BornTextBlock" HorizontalAlignment="Left" Margin="22,131,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.DateOfBirthStringDanish}" VerticalAlignment="Top" FontWeight="Thin" Foreground="White" FontSize="24"/>
         <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
-        <Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="9,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
-        <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="10,107,0,0" TextWrapping="Wrap" Text="Født" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="10,0,0,332" TextWrapping="Wrap" Text="3 måneder" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}" VerticalAlignment="Bottom"/>
-        <Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="239,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
+        <TextBlock x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="22,107,0,0" TextWrapping="Wrap" Text="Født" VerticalAlignment="Top" FontWeight="Thin" Foreground="White" FontSize="18" />
+        <!--<Rectangle Fill="#FF006C95" HorizontalAlignment="Left" Height="292" Margin="239,0,0,79" VerticalAlignment="Bottom" Width="205" Opacity="0.8" StrokeThickness="11"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="469,0,606,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="0,0,376,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
         <Rectangle Fill="#FF006C95" Height="292" Margin="0,0,146,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
         <Rectangle Fill="#FFB94CA6" Height="292" Margin="0,0,-84,79" VerticalAlignment="Bottom" Opacity="0.8" StrokeThickness="11" HorizontalAlignment="Right" Width="205"/>
-        <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.AgeStringDanish, Mode=TwoWay}" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="24" BorderBrush="{x:Null}"/>
-        <TextBox x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="10,176,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin" Background="{x:Null}" Foreground="White" FontSize="18" BorderBrush="{x:Null}"/>
+        -->
+        <TextBlock x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="22,199,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.AgeStringDanish, Mode=TwoWay}" VerticalAlignment="Top" FontWeight="Thin" Foreground="White" FontSize="24" />
+        <TextBlock x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="22,175,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin"  Foreground="White" FontSize="18" />
 
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="292" Margin="0,349,0,0" VerticalAlignment="Top" Width="1270" ItemsSource="{Binding VaccinesListSingleton.VaccinesList}"/>
+        <GridView x:Name="VaccinesGridView" HorizontalAlignment="Left" Height="361" Margin="20,349,0,00" VerticalAlignment="Top" Width="1210" FontWeight="Thin" ItemsSource="{Binding SelectedChild.VaccinesCardList}" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsItemClickEnabled="True" SelectedItem="{Binding SelectedVaccineCard, Mode=TwoWay}">
+            <Border Name="border" BorderBrush="Black" BorderThickness="100" Padding="50" Margin="50"/>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="{Binding CardColor}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="100"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="238" />
+                           
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MonthAndYearsToTakeStringDanish}" Foreground="White" FontSize="24"/>
+                        <Image Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Source="{Binding AgeIconFilename}" Opacity="{Binding AgeIconOpacity}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding VaccineName}" TextWrapping="Wrap" Foreground="White" FontSize="20"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Vaccine taget: " Foreground="White" FontSize="15"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding Taken}" Foreground="White" FontSize="15"/>
+
+                    </Grid>
+
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
 
 
 
@@ -45,11 +71,11 @@
 
 
 
-        <ComboBox x:Name="NameComboBox" SelectionChanged="NameComboBox_SelectionChanged" SelectedItem="{Binding SelectedChild, Mode=TwoWay}" FontSize="72" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top" Width="505" Height="113" Background="Transparent" BorderBrush="#00000000" ItemsSource="{Binding ChildrensListSingleton.ChildrensList}" PlaceholderText="Vælg barn">
+        <ComboBox x:Name="NameComboBox" SelectionChanged="NameComboBox_SelectionChanged" SelectedItem="{Binding SelectedChild, Mode=TwoWay}" FontSize="72" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="3,0,0,0" VerticalAlignment="Top" Width="505" Height="113" Background="Transparent" BorderBrush="#00000000" ItemsSource="{Binding ChildrensListSingleton.ChildrensList}" PlaceholderText="{Binding ChildrensListSingleton.ChildrensList[0].Name}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" FontSize="72" />
                     </Grid>
                 </DataTemplate>
             </ComboBox.ItemTemplate>
@@ -58,7 +84,7 @@
 
 
         <ListView x:Name="listView1" HorizontalAlignment="Left" Height="186" Margin="554,112,0,0" VerticalAlignment="Top" Width="580" ItemsSource="{Binding VaccinesListSingleton.VaccinesTakenList}">
-            <Border Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
+            <Border Name="border2" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -78,6 +104,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <TextBlock x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="22,295,0,0" TextWrapping="Wrap" Text="Vacciner" VerticalAlignment="Top" FontWeight="Thin"  Foreground="White" FontSize="36" SelectionChanged="textBox1_Copy1_SelectionChanged" />
 
 
     </Grid>

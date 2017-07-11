@@ -37,7 +37,9 @@ namespace Vacit.Model
 
         public PersistencyService ps;
 
+        public VaccinesTaken vt;
 
+        public Child c;
 
 
 
@@ -54,6 +56,12 @@ namespace Vacit.Model
 
 
 
+
+        public CardList CardListForView { get; set; }
+
+
+
+      
 
 
 
@@ -95,11 +103,33 @@ namespace Vacit.Model
         {
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
-            nextChildID++;                                     // Increment nextChildID
 
             // Create rows in VaccinesTaken for the new child
-        
+            //foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+            //{
+            //    vt = new VaccinesTaken(newChild.ChildID, item.VacMonthID);
+            //}
+            ////PersistencyService
 
+            //// LINQ combinding 3 lists
+            //var standardCardList = from v in VaccinesListSingleton.Instance.VaccinesList
+            //                       join vwm in VaccinesListSingleton.Instance.MonthToTakeVaccinesList
+            //                       on v.VacID equals vwm.VacID                      
+            //                       orderby vwm.MonthToTake
+            //                       select new CardList() { vaccineName = v.VacName, monthToTake = vwm.MonthToTake };
+
+            //CardListForView = new CardList();
+            //c.VaccinesCardList = new ObservableCollection<VaccinesCard>();
+
+            ////numberOfCards = VaccinesListSingleton.Instance.MonthToTakeVaccinesList.Count;
+
+            //foreach (var item in standardCardList)
+            //{
+            //     c.VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, false, newChild.GenderGirl));
+            //}
+
+          
+            nextChildID++;                                     // Increment nextChildID
         }
 
         public void RemoveChild(Child childToRemove)
