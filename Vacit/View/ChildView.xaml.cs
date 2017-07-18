@@ -25,6 +25,13 @@ namespace Vacit
         public ChildView()
         {
             this.InitializeComponent();
+
+
+            //var vm = DataContext as Vacit.ViewModel.VacitViewModel;
+            //if (vm == null) return;
+            //vm.VaccinesGridView_SelectionChanged += VaccinesGridView_SelectionChanged;
+
+
         }
 
 
@@ -50,6 +57,32 @@ namespace Vacit
         private void textBox1_Copy1_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
+        }
+
+
+        private void VaccinesGridView_SelectionChanged(object sender, RoutedEventArgs e)//NotificationEventArgs<string> e)
+        {
+
+          
+            
+            //var gridview = (GridView)sender;
+            //var item = (GridViewItem)gridview.SelectedItem;
+            //if (VaccinesGridView.SelectedIndex>-1)
+            //this.VaccinesGridView.SelectedIndex = -1;
+
+           
+        }
+
+        private void VaccinesGridView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+           // this.VaccinesGridView.SelectedIndex = -1;
+
+            
+            //VaccinesGridView.SelectedItems.Clear();
+
+            //VaccinesGridView.SelectedItem = null;
+            
+            
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Vacit.ViewModel;
 using Vacit.Model;
 using Vacit.Converter;
+using Vacit.Common;
 
 namespace Vacit.Handler
 {
@@ -34,6 +35,8 @@ namespace Vacit.Handler
                     item.VacMonthID);
 
                 VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+
+                //Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
             }
 
 
@@ -50,6 +53,11 @@ namespace Vacit.Handler
             // Add to list             
             VacitViewModel.ChildrensListSingleton.AddChild(newChild);
 
+
+            // Make ToastNotifications
+            ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
+                                             newChild.Name + " er " + newChild.AgeStringDanish+" gammel, og derfor er der "+" til",
+                                             )
 
 
             // Increment next ChildID and make it ready for next post
@@ -72,6 +80,46 @@ namespace Vacit.Handler
             VacitViewModel.ChildrensListSingleton.UpdateChild(VacitViewModel.SelectedChild);
         }
 
+
+
+
+        public void UpdateFromButton()
+        {
+            foreach (var item in VacitViewModel.SelectedChild.VaccinesCardList)
+            {
+
+                int indx = VacitViewModel.SelectedChild.VaccinesCardList.IndexOf(item);
+                VacitViewModel.ChildrensListSingleton.UpdateVaccineTaken(item,indx,VacitViewModel.SelectedChild.ChildID);
+                                                                         
+                var tempCard = item;
+                VacitViewModel.SelectedChild.VaccinesCardList.RemoveAt(indx);//VacitViewModel.SelectedVaccineCard);
+                                                                             //if (tempCard.Taken) tempCard.Taken = false; else tempCard.Taken = true;
+                VacitViewModel.SelectedChild.VaccinesCardList.Insert(indx, tempCard);
+            }
+
+        }
+
+
+
+
+        public void UpdateVaccineTaken()
+        {
+            int indx = VacitViewModel.SelectedChild.VaccinesCardList.IndexOf(VacitViewModel.SelectedVaccineCard);
+            VacitViewModel.ChildrensListSingleton.UpdateVaccineTaken(VacitViewModel.SelectedVaccineCard,
+                                                                     indx,
+                                                                     VacitViewModel.SelectedChild.ChildID
+                                                                     );
+            var tempCard = VacitViewModel.SelectedVaccineCard;
+            VacitViewModel.SelectedChild.VaccinesCardList.RemoveAt(indx);//VacitViewModel.SelectedVaccineCard);
+            //if (tempCard.Taken) tempCard.Taken = false; else tempCard.Taken = true;
+            VacitViewModel.SelectedChild.VaccinesCardList.Insert(indx, tempCard);
+
+
+            
+            //VacitViewModel.SelectedVaccineCard.Taken = false;
+            //VacitViewModel.SelectedChild.VaccinesCardList[indx]= VacitViewModel.SelectedVaccineCard;
+            //VacitViewModel.SelectedChild.VaccinesCardList.Remove(VacitViewModel.SelectedVaccineCard);
+        }
 
     }
 }

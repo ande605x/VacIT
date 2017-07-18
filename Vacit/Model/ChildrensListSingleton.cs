@@ -104,6 +104,20 @@ namespace Vacit.Model
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
 
+
+
+            foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+            {
+                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                   NextChildID,
+                   item.VacMonthID);
+
+                Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+            }
+
+
+
+
             // Create rows in VaccinesTaken for the new child
             //foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             //{
@@ -128,7 +142,7 @@ namespace Vacit.Model
             //     c.VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, false, newChild.GenderGirl));
             //}
 
-          
+
             nextChildID++;                                     // Increment nextChildID
         }
 
@@ -146,6 +160,66 @@ namespace Vacit.Model
 
 
 
+        public void UpdateVaccineTaken(VaccinesCard vaccineCardToUpdate,int vaccineCardToUpdateIndex, int childIDKey)
+        {
 
+            // Find VacMonthID of selected card via VaccineName (to find VacID) and MonthToTake
+            int cardVacID = VaccinesListSingleton.Instance.VaccinesList.FirstOrDefault
+                                (x => x.VacName == vaccineCardToUpdate.VaccineName)
+                                .VacID;
+
+            int vacMonthIDKey = VaccinesListSingleton.Instance.MonthToTakeVaccinesList.FirstOrDefault
+                                    (x=>x.VacID==cardVacID && x.MonthToTake==vaccineCardToUpdate.MonthToTake)
+                                    .VacMonthID;
+
+            
+            
+            // Using lambda expression to find VaccineTaken with the composite keys
+            var foundTaken = VaccinesListSingleton.Instance.VaccinesTakenList.FirstOrDefault(x=>x.ChildID == childIDKey && x.VacMonthID==vacMonthIDKey);
+
+            if (true)//foundTaken != null)
+            {
+                if (foundTaken.VacTaken) foundTaken.VacTaken = false;
+                else foundTaken.VacTaken = true;
+            }
+            //VaccinesListSingleton.Instance.VaccinesTakenList.CollectionChanged += VaccinesTakenList_CollectionChanged;
+
+            
+
+            if (vaccineCardToUpdate.Taken) vaccineCardToUpdate.Taken = false;
+            else vaccineCardToUpdate.Taken = true;
+
+
+
+            bool genderGirl = ChildrensListSingleton.Instance.ChildrensList.FirstOrDefault
+                                  (x => x.ChildID == childIDKey)
+                                  .GenderGirl;
+
+
+
+            if (vaccineCardToUpdate.Taken)
+            {
+                vaccineCardToUpdate.CardColor = "#7F444444";
+                vaccineCardToUpdate.AgeIconOpacity = 0.5;
+            }
+            else
+            {
+                if (genderGirl) vaccineCardToUpdate.CardColor = "#CCB94CA6";
+                else vaccineCardToUpdate.CardColor = "#CC006C95";    
+                vaccineCardToUpdate.AgeIconOpacity = 1.0;
+            }
+
+
+            //VaccinesListSingleton.Instance.VaccinesCardList.Insert(vaccineCardToUpdateIndex,vaccineCardToUpdate);
+
+
+
+            PersistencyService.UpdateVaccinesTakenJsonAsync(foundTaken);
+        }
+
+        private void VaccinesTakenList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

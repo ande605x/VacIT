@@ -66,7 +66,7 @@ namespace Vacit.Model
         public ObservableCollection<VaccinesCard> VaccinesCardList
         {
             get { return vaccinesCardList; }
-            set { vaccinesCardList = value; }
+            set { vaccinesCardList = value;  }
         }
 
 

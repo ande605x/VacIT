@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ShowMessages.cs" />
+    <Compile Include="Common\ToastMessages.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Handler\ChildHandler.cs" />
     <Compile Include="Handler\VaccineHandler.cs" />

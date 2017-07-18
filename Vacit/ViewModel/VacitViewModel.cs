@@ -88,24 +88,53 @@ namespace Vacit.ViewModel
         }
 
 
+        private ICommand updateVaccineTakenCommand;
+
+        public ICommand UpdateVaccineTakenCommand
+        {
+            get { return updateVaccineTakenCommand; }
+            set { updateVaccineTakenCommand = value; }
+        }
+
+
+
+      //  public event EventHandler<NotificationEventArgs<string>> VaccinesGridView_SelectionChanged;
+
+
+
+
+
 
         private Child selectedChild;
         public Child SelectedChild
         {
             get { return selectedChild; }
-            set { selectedChild = value; OnPropertyChanged(nameof(SelectedChild)); }
+            set { selectedChild = value; OnPropertyChanged(nameof(SelectedChild));  }
         }
 
 
+
+        public VaccinesCard LastChangedCard { get; set; }
 
         private VaccinesCard selectedVaccineCard;
 
         public VaccinesCard SelectedVaccineCard
         {
             get { return selectedVaccineCard; }
-            set { selectedVaccineCard = value;
-                Common.ShowMessages.ShowPopUp("Valgt vaccinecard: "+value.VaccineName);
-                OnPropertyChanged(nameof(SelectedVaccineCard)); }
+            set
+            {
+                selectedVaccineCard = value;
+
+                if (LastChangedCard!=selectedVaccineCard && value!=null)//!isUpdated)
+                {
+                    LastChangedCard = value;
+                    ChildHandler.UpdateVaccineTaken();
+                    //Common.ShowMessages.ShowPopUp("Valgt vaccinecard: " + value.VaccineName);
+                    //OnPropertyChanged(nameof(SelectedVaccineCard));
+                    
+                }
+
+                }
         }
 
 
@@ -148,13 +177,15 @@ namespace Vacit.ViewModel
             dateOfBirth = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, new TimeSpan());
 
             SelectedChild = ChildrensListSingleton.ChildrensList.First(); //Vælger barn nr 1 i listen til start
-           
 
+            LastChangedCard = null;
+          
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
             DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild);
             UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);
+            UpdateVaccineTakenCommand = new RelayCommand(ChildHandler.UpdateFromButton);//ChildHandler.UpdateVaccineTaken);
 
-
+            //Notify(VaccinesGridView_SelectionChanged, new NotificationEventArgs<string>("Message"));
 
         }
     }

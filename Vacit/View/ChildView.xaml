@@ -36,7 +36,7 @@
         <TextBlock x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="22,199,0,0" TextWrapping="Wrap" Text="{Binding SelectedChild.AgeStringDanish, Mode=TwoWay}" VerticalAlignment="Top" FontWeight="Thin" Foreground="White" FontSize="24" />
         <TextBlock x:Name="textBox1_Copy3" HorizontalAlignment="Left" Margin="22,175,0,0" TextWrapping="Wrap" Text="Alder" VerticalAlignment="Top" FontWeight="Thin"  Foreground="White" FontSize="18" />
 
-        <GridView x:Name="VaccinesGridView" HorizontalAlignment="Left" Height="361" Margin="20,349,0,00" VerticalAlignment="Top" Width="1210" FontWeight="Thin" ItemsSource="{Binding SelectedChild.VaccinesCardList}" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsItemClickEnabled="True" SelectedItem="{Binding SelectedVaccineCard, Mode=TwoWay}">
+        <GridView x:Name="VaccinesGridView" HorizontalAlignment="Left" Height="361" Margin="20,349,0,00" VerticalAlignment="Top" Width="1210" FontWeight="Thin" ItemsSource="{Binding SelectedChild.VaccinesCardList}" SelectionChanged="VaccinesGridView_SelectionChanged_1" SelectedItem="{Binding SelectedVaccineCard, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
             <Border Name="border" BorderBrush="Black" BorderThickness="100" Padding="50" Margin="50"/>
             <GridView.ItemTemplate>
                 <DataTemplate>
@@ -57,8 +57,10 @@
                         <Image Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Source="{Binding AgeIconFilename}" Opacity="{Binding AgeIconOpacity}" />
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding VaccineName}" TextWrapping="Wrap" Foreground="White" FontSize="20"/>
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Vaccine taget: " Foreground="White" FontSize="15"/>
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding Taken}" Foreground="White" FontSize="15"/>
-
+                        <StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal" >
+                            <CheckBox IsChecked="{Binding Taken, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Text="{Binding Taken}" Foreground="White" FontSize="15"/>
+                        </StackPanel>
                     </Grid>
 
                 </DataTemplate>
@@ -83,7 +85,7 @@
 
 
 
-        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="186" Margin="554,112,0,0" VerticalAlignment="Top" Width="580" ItemsSource="{Binding VaccinesListSingleton.VaccinesTakenList}">
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="186" Margin="754,112,0,0" VerticalAlignment="Top" Width="280" ItemsSource="{Binding VaccinesListSingleton.VaccinesTakenList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <Border Name="border2" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -104,7 +106,34 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+     
         <TextBlock x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="22,295,0,0" TextWrapping="Wrap" Text="Vacciner" VerticalAlignment="Top" FontWeight="Thin"  Foreground="White" FontSize="36" SelectionChanged="textBox1_Copy1_SelectionChanged" />
+
+
+
+        <ListView x:Name="listView4" HorizontalAlignment="Left" Height="186" Margin="254,112,0,0" VerticalAlignment="Top" Width="280" ItemsSource="{Binding VaccinesListSingleton.VaccinesCardList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <Border Name="border4" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*" />
+                            <ColumnDefinition Width="27*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MonthAndYearsToTakeStringDanish}" FontSize="20"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding VaccineName}" FontSize="25"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Vaccine taget? " Foreground="White" FontSize="15"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Taken}" Foreground="White" FontSize="15"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button x:Name="UpdateVaccineCardsButton" Content="Opdater" HorizontalAlignment="Left" Margin="1112,311,0,0" VerticalAlignment="Top" Foreground="White" Command="{Binding UpdateVaccineTakenCommand, Mode=TwoWay}"/>
+
 
 
     </Grid>

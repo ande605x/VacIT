@@ -220,7 +220,7 @@ namespace Vacit.Persistency
 
 
 
-        const string urlVaccinesTaken = "api/VaccinesTakens/";
+        const string urlVaccinesTaken = "api/VaccinesTakens";
 
         //GET VaccinesTaken
         public static ObservableCollection<VaccinesTaken> LoadVaccinesTakenFromJsonAsync()
@@ -251,13 +251,74 @@ namespace Vacit.Persistency
 
 
 
+        // POST VaccinsTaken
+        public static void SaveVaccinesTakenAsJsonAsync(VaccinesTaken newVaccineTakenToAdd)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.PostAsJsonAsync<VaccinesTaken>(urlVaccinesTaken, newVaccineTakenToAdd).Result;
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ShowMessages.ShowPopUp("Fejl. VaccineTaget blev ikke oprettet i databasen: " + response.StatusCode);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+            }
+        }
 
 
 
-        
-       const string urlMonthToTakeVaccines = "api/MonthToTakeVaccines/";
+        // PUT VaccinesTaken
+        public static void UpdateVaccinesTakenJsonAsync(VaccinesTaken selectedVaccineTakenToUpdate)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Clear();
+                    string urlUpdateVT = urlVaccinesTaken+"?ChildID="+ selectedVaccineTakenToUpdate.ChildID+"&VacMonthID="+selectedVaccineTakenToUpdate.VacMonthID;
 
-        //GET VaccinesTaken
+                    HttpResponseMessage response = client.PutAsJsonAsync<VaccinesTaken>(urlUpdateVT, selectedVaccineTakenToUpdate).Result;
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ShowMessages.ShowPopUp("Fejl. VaccineTaken blev ikke opdateret i databasen: " + response.StatusCode);
+                    }
+                    else
+                    {
+                        ShowMessages.ShowPopUp("VaccineTaken er nu opdateret i databasen");
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+        const string urlMonthToTakeVaccines = "api/MonthToTakeVaccines/";
+
+        //GET MonthToTakeVaccines
         public static ObservableCollection<MonthToTakeVaccine> LoadMonthToTakeVaccineFromJsonAsync()
         {
             try
