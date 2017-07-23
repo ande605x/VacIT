@@ -102,6 +102,11 @@ namespace Vacit.Model
 
             monthToTakeVaccinesList = PersistencyService.LoadMonthToTakeVaccineFromJsonAsync();
             vaccinesTakenList = PersistencyService.LoadVaccinesTakenFromJsonAsync();
+
+
+
+
+
         }
 
 

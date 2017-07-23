@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vacit.Persistency;
+using Vacit.Common;
 
 namespace Vacit.Model
 {
@@ -61,7 +62,12 @@ namespace Vacit.Model
 
 
 
-      
+
+
+
+
+
+
 
 
 
@@ -76,6 +82,7 @@ namespace Vacit.Model
                 //ChildrensList.Add(new Child("Jens", System.DateTime.Now, false));
 
             // Get list from database from server
+            
             GetChildren();
 
 
@@ -113,8 +120,27 @@ namespace Vacit.Model
                    item.VacMonthID);
 
                 Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+
             }
 
+
+
+
+            // Make ToastNotifications
+            foreach (var vwmlItem in VaccinesListSingleton.Instance.VaccinesWithMonthList)
+            {
+               
+                DateTime vacTime = newChild.DateOfBirth.AddMonths(vwmlItem.MonthToTake);
+                if (vacTime >= DateTime.Now)  // Only notify if date is after present time
+                {
+                    ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
+                                                     newChild.Name + " skal vaccineres " + Vacit.Converter.DateConverter.DateStringDanish(vacTime),       //+ " er " + newChild.AgeStringDanish + " gammel, og derfor er der " + " til",
+                                                     "Vaccine: " + vwmlItem.VacName,
+                                                     @"C:\SOURCE\Vacit\Vacit\Assets\beskyt_mod_vaccination.jpg",
+                                                     vacTime);
+                }
+
+            }
 
 
 
@@ -217,9 +243,6 @@ namespace Vacit.Model
             PersistencyService.UpdateVaccinesTakenJsonAsync(foundTaken);
         }
 
-        private void VaccinesTakenList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

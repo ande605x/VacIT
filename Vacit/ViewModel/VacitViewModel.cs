@@ -8,6 +8,7 @@ using System.Windows.Input;
 using Vacit.Model;
 using Vacit.Common;
 using Vacit.Handler;
+using System.Collections.ObjectModel;
 
 namespace Vacit.ViewModel
 {
@@ -17,6 +18,7 @@ namespace Vacit.ViewModel
         // Singleton property
         public ChildrensListSingleton ChildrensListSingleton { get; set; }
         public VaccinesListSingleton VaccinesListSingleton { get; set; }
+        public DoctorsListSingleton DoctorsListSingleton { get; set; }
 
 
         //PropertyChanged
@@ -151,7 +153,55 @@ namespace Vacit.ViewModel
 
 
 
-        
+
+
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set { isBusy = value; OnPropertyChanged(nameof(IsBusy)); }
+        }
+
+
+
+
+        private int doctorsPostalCodeChosen;
+
+        public int DoctorsPostalCodeChosen
+        {
+            get { return doctorsPostalCodeChosen; }
+            set {   doctorsPostalCodeChosen = value;
+                    OnPropertyChanged(nameof(DoctorsPostalCodeChosen));
+                    if (doctorsPostalCodeChosen > 900 && doctorsPostalCodeChosen < 10000)
+                    {
+                        DoctorsListSingleton.DoctorsList = new ObservableCollection<Doctors>(DoctorsListSingleton.DoctorsListTotal.Where(x => x.Postnr == doctorsPostalCodeChosen));
+                    }
+                    else
+                    {
+                         DoctorsListSingleton.DoctorsList = DoctorsListSingleton.DoctorsListTotal;
+                    }
+                    
+                    
+                    
+                    //DoctorsListSingleton.Instance.TrimListByPostalCode(doctorsPostalCodeChosen);
+                //ChildHandler.UpdateDoctorsList();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // Handler property
@@ -164,8 +214,10 @@ namespace Vacit.ViewModel
         // Constructor
         public VacitViewModel()
         {
+            IsBusy = true;
             ChildrensListSingleton = ChildrensListSingleton.Instance;
             VaccinesListSingleton = VaccinesListSingleton.Instance;
+            DoctorsListSingleton = DoctorsListSingleton.Instance;
 
             NextChildIDforView = ChildrensListSingleton.NextChildID;
             //ChildID = ChildrensListSingleton.NextChildID;
@@ -179,7 +231,8 @@ namespace Vacit.ViewModel
             SelectedChild = ChildrensListSingleton.ChildrensList.First(); //Vælger barn nr 1 i listen til start
 
             LastChangedCard = null;
-          
+            
+           
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
             DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild);
             UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);

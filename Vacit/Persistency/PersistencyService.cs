@@ -348,6 +348,55 @@ namespace Vacit.Persistency
 
 
 
+
+
+
+
+
+
+
+        const string urlDoctors = "api/Doctors/";
+
+        //GET Doctors
+        public static ObservableCollection<Doctors> LoadDoctorsFromJsonAsync()
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    client.DefaultRequestHeaders.Clear();
+
+                    HttpResponseMessage response = client.GetAsync(urlDoctors).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var doctorsList = response.Content.ReadAsAsync<ObservableCollection<Doctors>>().Result;
+                        return doctorsList;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+
+            }
+            return null; // If error, return null
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // Constructor
         public PersistencyService()
         {

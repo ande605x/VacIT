@@ -26,17 +26,22 @@ namespace Vacit.Handler
         public void CreateChild()
         {
 
+            VacitViewModel.IsBusy = true;
+
+
             // Create rows in VaccinesTaken for the new child
 
             foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             {
                 VaccinesTaken newVaccinesTaken = new VaccinesTaken(
                     VacitViewModel.NextChildIDforView,
-                    item.VacMonthID);
+                    item.VacMonthID); // VaccineTaken is false when creating new child
+
 
                 VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
 
                 //Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+
             }
 
 
@@ -52,17 +57,13 @@ namespace Vacit.Handler
 
             // Add to list             
             VacitViewModel.ChildrensListSingleton.AddChild(newChild);
-
-
-            // Make ToastNotifications
-            ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
-                                             newChild.Name + " er " + newChild.AgeStringDanish+" gammel, og derfor er der "+" til",
-                                             )
-
+          
 
             // Increment next ChildID and make it ready for next post
             VacitViewModel.NextChildIDforView++;
 
+
+            VacitViewModel.IsBusy = false;
 
         } 
 
@@ -80,6 +81,13 @@ namespace Vacit.Handler
             VacitViewModel.ChildrensListSingleton.UpdateChild(VacitViewModel.SelectedChild);
         }
 
+
+
+
+        public void UpdateDoctorsList()
+        {
+            VacitViewModel.DoctorsListSingleton.TrimListByPostalCode(VacitViewModel.DoctorsPostalCodeChosen);
+        }
 
 
 

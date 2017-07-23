@@ -50,6 +50,13 @@
                         </StackPanel>
                     </ListBoxItem>
 
+                    <ListBoxItem Name="DoctorsMenuItem">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE102;" />
+                            <TextBlock Text="Book tid" FontSize="8" Margin="0,0,0,0" />
+                        </StackPanel>
+                    </ListBoxItem>
+
                 </ListBox>
             </SplitView.Pane>
             <SplitView.Content>

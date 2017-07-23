@@ -51,8 +51,12 @@ namespace Vacit
                 //TitleTextBlock.Text = "Food";
             }
             else if (VaccinesInfoMenuItem.IsSelected)
-                {
+            {
                 ChosenFrame.Navigate(typeof(VaccinesInfoView));
+            }
+            else if (DoctorsMenuItem.IsSelected)
+            {
+                ChosenFrame.Navigate(typeof(DoctorsView));
             }
         }
     }

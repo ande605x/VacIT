@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="Assets\laegepraksisdk list for app.xlsx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +104,8 @@
     <Compile Include="Handler\VaccineHandler.cs" />
     <Compile Include="Model\CardList.cs" />
     <Compile Include="Model\Child.cs" />
+    <Compile Include="Model\Doctors.cs" />
+    <Compile Include="Model\DoctorsListSingleton.cs" />
     <Compile Include="Model\MonthToTakeVaccine.cs" />
     <Compile Include="Model\Vaccine.cs" />
     <Compile Include="Model\VaccinesCard.cs" />
@@ -115,8 +118,14 @@
     <Compile Include="View\AddChildView.xaml.cs">
       <DependentUpon>AddChildView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\BookingView.xaml.cs">
+      <DependentUpon>BookingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DoctorsView.xaml.cs">
+      <DependentUpon>DoctorsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
@@ -134,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\800px_COLOURBOX2722751.jpg" />
+    <Content Include="Assets\beskyt_mod_vaccination.jpg" />
     <Content Include="Assets\Boy1.png" />
     <Content Include="Assets\Boy2.png" />
     <Content Include="Assets\Boy3.png" />
@@ -155,6 +165,8 @@
     <Content Include="Assets\Girl5.png" />
     <Content Include="Assets\Girl6.png" />
     <Content Include="Assets\Girl7.png" />
+    <Content Include="Assets\laegepraksisdk list for app.xml" />
+    <Content Include="Assets\laeger.xml" />
     <Content Include="Assets\natur-børn.jpg" />
     <Content Include="Assets\RegionSjællandLogoTrans.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -175,7 +187,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\BookingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ChildView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DoctorsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

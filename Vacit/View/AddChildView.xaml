@@ -56,6 +56,9 @@
         <Button x:Name="DeleteButton" Content="Slet valgte" HorizontalAlignment="Left" Margin="630,616,0,0" VerticalAlignment="Top" Background="#66FFFFFF" Foreground="White" Command="{Binding DeleteChildCommand}" FontSize="20" BorderBrush="Black" Click="button_Copy_Click"/>
 
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="792,117,0,0" TextWrapping="Wrap" Text="{Binding NextChildIDforView}" VerticalAlignment="Top"/>
+       
+        <ProgressRing HorizontalAlignment="Left" Margin="635,191,0,0" VerticalAlignment="Top" IsActive="{Binding IsBusy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="84" Width="84" Background="Red" BorderBrush="#FFFF7575"/>
+
 
 
     </Grid>

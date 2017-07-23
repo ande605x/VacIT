@@ -20,6 +20,9 @@
             </LinearGradientBrush>
         </Grid.Background>
 
+        <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
+
+
 
         <ListView x:Name="VaccinesListView" HorizontalAlignment="Left" Height="559" Margin="90,56,0,0" VerticalAlignment="Top" Width="920" ItemsSource="{Binding VaccinesListSingleton.VaccinesList}" Background="#33FFFFFF">
             <ListView.ItemTemplate>

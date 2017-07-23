@@ -15,6 +15,7 @@ namespace Vacit.Common
         public DateTime standardScheduledTimeBefore1 { get; set; }
         public DateTime standardScheduledTimeBefore2 { get; set; }
         public DateTime standardScheduledTimeBefore3 { get; set; }
+        public DateTime scheduleTestTime { get; set; }
 
 
 
@@ -28,15 +29,21 @@ namespace Vacit.Common
             toastStringElements[1].AppendChild(toastXml.CreateTextNode(line2));
             toastStringElements[2].AppendChild(toastXml.CreateTextNode(line3));
 
-            String imagePath = "file:///" + Path.GetFullPath(imageFilename);
+            String imagePath = "file:///" + imageFilename;// Path.GetFullPath(imageFilename);
             XmlNodeList toastImageElements = toastXml.GetElementsByTagName("image");
+            toastImageElements[0].Attributes[1].NodeValue = imagePath;
 
-            //ToastNotification toast = new ToastNotification(toastXml);
+          
 
-            DateTime scheduledTime1 = DateTime.Now.AddSeconds(3);//vaccineTime - standardScheduledTimeBefore1;
+            // FOR TESTING ONLY 7 SECONDS:
+            DateTime scheduleTestTime = DateTime.Now.AddSeconds(7);
+            ScheduledToastNotification scheduledToastTest = new ScheduledToastNotification(toastXml, scheduleTestTime);
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToastTest);
 
-            ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
+            // NORMAL SCHEDULING:
+            // DateTime scheduledTime1 = DateTime.Now.AddSeconds(7);//vaccineTime - standardScheduledTimeBefore1;
+            // ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
+            // ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
         }
 
 
