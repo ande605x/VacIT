@@ -41,6 +41,10 @@ namespace Vacit.Model
 
 
 
+        // er der brug for ToString metode?? se martins HotelAppGuestWin10
+
+
+
         public Child(int childID,string name, DateTime dateOfBirth, bool genderGirl)
         {
             this.ChildID = childID;
@@ -74,7 +78,7 @@ namespace Vacit.Model
 
             foreach (var item in cardList)
             {
-                  VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, item.taken, genderGirl));
+                  VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, item.taken, genderGirl, dateOfBirth));
             }
 
             

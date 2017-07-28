@@ -54,6 +54,7 @@ namespace Vacit.Model
         }
 
 
+        public int lastChildID { get; set; }
 
 
 
@@ -82,11 +83,11 @@ namespace Vacit.Model
                 //ChildrensList.Add(new Child("Jens", System.DateTime.Now, false));
 
             // Get list from database from server
-            
             GetChildren();
 
+            lastChildID = childrensList.LastOrDefault().ChildID;
 
-            //nextChildID= childrensList.Last().ChildID+1;
+            //nextChildID= ChildrensList.Last().ChildID+1;
 
             // Find ChildID for the next new child (last ChildID+1)  (This only run once when app opens)
             foreach (var i in childrensList)
@@ -111,15 +112,21 @@ namespace Vacit.Model
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
 
-
+            
 
             foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             {
-                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                // Find vaccinenames with contains the word "piger"
+                var containsPiger = VaccinesListSingleton.Instance.VaccinesList.FirstOrDefault(x => x.VacName.Contains("piger"));
+                // Test if boy and contains "piger" OR is a girl  
+                if ((!newChild.GenderGirl && containsPiger.VacID != item.VacID || newChild.GenderGirl))
+                {
+                    VaccinesTaken newVaccinesTaken = new VaccinesTaken(
                    NextChildID,
                    item.VacMonthID);
 
-                Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+                    Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+                }
 
             }
 
@@ -129,53 +136,51 @@ namespace Vacit.Model
             // Make ToastNotifications
             foreach (var vwmlItem in VaccinesListSingleton.Instance.VaccinesWithMonthList)
             {
-               
-                DateTime vacTime = newChild.DateOfBirth.AddMonths(vwmlItem.MonthToTake);
-                if (vacTime >= DateTime.Now)  // Only notify if date is after present time
+                // Find vaccinenames with contains the word "piger"
+                var containsPiger = VaccinesListSingleton.Instance.VaccinesList.FirstOrDefault(x => x.VacName.Contains("piger"));
+                // Test if boy and contains "piger" OR is a girl  
+                if ((!newChild.GenderGirl && containsPiger.VacID != vwmlItem.VacID || newChild.GenderGirl))
                 {
-                    ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
-                                                     newChild.Name + " skal vaccineres " + Vacit.Converter.DateConverter.DateStringDanish(vacTime),       //+ " er " + newChild.AgeStringDanish + " gammel, og derfor er der " + " til",
-                                                     "Vaccine: " + vwmlItem.VacName,
-                                                     @"C:\SOURCE\Vacit\Vacit\Assets\beskyt_mod_vaccination.jpg",
-                                                     vacTime);
+
+                    DateTime vacTime = newChild.DateOfBirth.AddMonths(vwmlItem.MonthToTake);
+                    if (vacTime >= DateTime.Now)  // Only notify if date is after present time
+                    {
+                        ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
+                                                         newChild.Name + " skal vaccineres senest " + Vacit.Converter.DateConverter.DateStringDanish(vacTime),       //+ " er " + newChild.AgeStringDanish + " gammel, og derfor er der " + " til",
+                                                         "Vaccine: " + vwmlItem.VacName,
+                                                         @"C:\SOURCE\Vacit\Vacit\Assets\beskyt_mod_vaccination.jpg",
+                                                         vacTime);
+                    }
                 }
 
             }
-
-
-
-            // Create rows in VaccinesTaken for the new child
-            //foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
-            //{
-            //    vt = new VaccinesTaken(newChild.ChildID, item.VacMonthID);
-            //}
-            ////PersistencyService
-
-            //// LINQ combinding 3 lists
-            //var standardCardList = from v in VaccinesListSingleton.Instance.VaccinesList
-            //                       join vwm in VaccinesListSingleton.Instance.MonthToTakeVaccinesList
-            //                       on v.VacID equals vwm.VacID                      
-            //                       orderby vwm.MonthToTake
-            //                       select new CardList() { vaccineName = v.VacName, monthToTake = vwm.MonthToTake };
-
-            //CardListForView = new CardList();
-            //c.VaccinesCardList = new ObservableCollection<VaccinesCard>();
-
-            ////numberOfCards = VaccinesListSingleton.Instance.MonthToTakeVaccinesList.Count;
-
-            //foreach (var item in standardCardList)
-            //{
-            //     c.VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, false, newChild.GenderGirl));
-            //}
-
+    
 
             nextChildID++;                                     // Increment nextChildID
         }
 
         public void RemoveChild(Child childToRemove)
         {
+            // Remove from VaccinesTakenList with right ChildID
+            var countTaken = VaccinesListSingleton.Instance.VaccinesTakenList.Count(x => x.ChildID == childToRemove.ChildID);
+            for (int i=0;i<=countTaken;i++)
+            {
+                var firstItem = VaccinesListSingleton.Instance.VaccinesTakenList.FirstOrDefault(x => x.ChildID == childToRemove.ChildID);
+                if (firstItem != null)
+                { 
+                        VaccinesListSingleton.Instance.VaccinesTakenList.Remove(firstItem);
+                        Persistency.PersistencyService.DeleteVaccinesTakenJsonAsync(firstItem);
+                }
+             }
+
+
             ChildrensList.Remove(childToRemove);                        // Delete child locally
             PersistencyService.DeleteChildFromJsonAsync(childToRemove); // Delete child from server
+        
+
+            // husk fjern ToastMessages
+
+
         }
 
         public void UpdateChild(Child childToUpdate)
@@ -217,11 +222,11 @@ namespace Vacit.Model
 
 
 
+
+
             bool genderGirl = ChildrensListSingleton.Instance.ChildrensList.FirstOrDefault
                                   (x => x.ChildID == childIDKey)
                                   .GenderGirl;
-
-
 
             if (vaccineCardToUpdate.Taken)
             {
@@ -234,6 +239,28 @@ namespace Vacit.Model
                 else vaccineCardToUpdate.CardColor = "#CC006C95";    
                 vaccineCardToUpdate.AgeIconOpacity = 1.0;
             }
+
+
+
+
+
+            DateTime dateOfBirth = ChildrensListSingleton.Instance.ChildrensList.FirstOrDefault
+                                  (x => x.ChildID == childIDKey)
+                                  .DateOfBirth;
+
+            int monthToTake = vaccineCardToUpdate.MonthToTake;
+
+
+            if (vaccineCardToUpdate.Taken) vaccineCardToUpdate.WhenToTakeStringDanish = "\nDu har markeret vaccine taget";
+            else
+            {
+                if (dateOfBirth.AddMonths(monthToTake) <= DateTime.Now)
+                    vaccineCardToUpdate.WhenToTakeStringDanish = "Vaccine skulle være taget for\n" + Converter.DateConverter.AgeToStringDanish(dateOfBirth.AddMonths(monthToTake)) + " siden";
+                else
+                    vaccineCardToUpdate.WhenToTakeStringDanish = "Vaccine skal tages om\n" + Converter.DateConverter.AgeToStringDanish(dateOfBirth.AddMonths(monthToTake));
+            }
+
+
 
 
             //VaccinesListSingleton.Instance.VaccinesCardList.Insert(vaccineCardToUpdateIndex,vaccineCardToUpdate);

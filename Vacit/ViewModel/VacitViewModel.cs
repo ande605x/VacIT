@@ -66,6 +66,15 @@ namespace Vacit.ViewModel
         }
 
 
+        private bool genderBoy;
+        public bool GenderBoy
+        {
+            get { return genderBoy; }
+            set { genderBoy = value; }
+        }
+
+
+
 
         //Command Properties
         private ICommand createChildCommand;
@@ -142,13 +151,59 @@ namespace Vacit.ViewModel
 
 
 
+
+        private Vaccine selectedVaccine;
+
+        public Vaccine SelectedVaccine
+        {
+            get { return selectedVaccine; }
+            set { selectedVaccine = value; OnPropertyChanged(nameof(SelectedVaccine)); }
+        }
+
+
+
+
+
+
+
+        private string doctorsSystemURL;
+
+        public string DoctorsSystemURL
+        {
+            get { return doctorsSystemURL; }
+            set { doctorsSystemURL = value; OnPropertyChanged(nameof(DoctorsSystemURL)); }
+        }
+
+
+
+
+        private Doctors selectedDoctor;
+
+        public Doctors SelectedDoctor
+        {
+            get { return selectedDoctor; }
+            set { selectedDoctor = value; OnPropertyChanged(nameof(SelectedDoctor));
+                if (SelectedDoctor != null)
+                {
+                    if (SelectedDoctor.System.Contains("A-Data")) DoctorsSystemURL = "http://www.aftalebogen.dk";
+                    else if (SelectedDoctor.System.Contains("NOVAX")) DoctorsSystemURL = "https://www.laegevejen.dk";
+                    else DoctorsSystemURL = "https://www.sundhed.dk/borger/guides/find-behandler/?Informationskategori=Praktiserende%20l%C3%A6ge";
+                }
+            }
+        }
+        
+
+
+
+
+
         //MIDLERTIDIG
         private int nextChildIDforView;
 
         public int NextChildIDforView
         {
             get { return nextChildIDforView; }
-            set { nextChildIDforView = value; OnPropertyChanged(nameof(Name)); }
+            set { nextChildIDforView = value; }// OnPropertyChanged(nameof(Name)); }
         }
 
 
@@ -175,7 +230,8 @@ namespace Vacit.ViewModel
                     OnPropertyChanged(nameof(DoctorsPostalCodeChosen));
                     if (doctorsPostalCodeChosen > 900 && doctorsPostalCodeChosen < 10000)
                     {
-                        DoctorsListSingleton.DoctorsList = new ObservableCollection<Doctors>(DoctorsListSingleton.DoctorsListTotal.Where(x => x.Postnr == doctorsPostalCodeChosen));
+                    //SelectedDoctor = DoctorsListSingleton.DoctorsList.First();
+                    DoctorsListSingleton.DoctorsList = new ObservableCollection<Doctors>(DoctorsListSingleton.DoctorsListTotal.Where(x => x.Postnr == doctorsPostalCodeChosen));
                     }
                     else
                     {
@@ -214,7 +270,10 @@ namespace Vacit.ViewModel
         // Constructor
         public VacitViewModel()
         {
-            IsBusy = true;
+            //IsBusy = true;
+            
+
+
             ChildrensListSingleton = ChildrensListSingleton.Instance;
             VaccinesListSingleton = VaccinesListSingleton.Instance;
             DoctorsListSingleton = DoctorsListSingleton.Instance;
@@ -230,13 +289,17 @@ namespace Vacit.ViewModel
 
             SelectedChild = ChildrensListSingleton.ChildrensList.First(); //Vælger barn nr 1 i listen til start
 
+            GenderBoy = false;
+            GenderGirl = false;
+
             LastChangedCard = null;
             
            
+            // HUSK TJEK RELAYCOMMAND FOR EMTY LIST OGSÅ. Tjek Eventmaker_01
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
             DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild);
-            UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);
-            UpdateVaccineTakenCommand = new RelayCommand(ChildHandler.UpdateFromButton);//ChildHandler.UpdateVaccineTaken);
+            //UpdateChildCommand = new RelayCommand(ChildHandler.UpdateChild);
+            //UpdateVaccineTakenCommand = new RelayCommand(ChildHandler.UpdateFromButton);//ChildHandler.UpdateVaccineTaken);
 
             //Notify(VaccinesGridView_SelectionChanged, new NotificationEventArgs<string>("Message"));
 

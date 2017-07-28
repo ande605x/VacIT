@@ -30,30 +30,30 @@
                          Name="MenuListBox" 
                          SelectionChanged="ListBox_SelectionChanged" Background="#FFF2F2F2">
                     <ListBoxItem Name="ListBoxItemOverview">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE125;" />
-                            <TextBlock Text="Oversigt" FontSize="8" Margin="0,0,0,0" />
+                            <TextBlock Text="Oversigt" FontSize="8" Margin="0,0,0,0" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="ListBoxItemAddChild">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE102;" />
-                            <TextBlock Text="Tilføj barn" FontSize="8" Margin="0,0,0,0" />
+                            <TextBlock Text="Børn" FontSize="8" Margin="0,0,0,0" HorizontalAlignment="Center" />
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="VaccinesInfoMenuItem">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE102;" />
-                            <TextBlock Text="Vacciner" FontSize="8" Margin="0,0,0,0" />
+                            <TextBlock Text="Vacciner" FontSize="8" Margin="0,0,0,0" HorizontalAlignment="Center" />
                         </StackPanel>
                     </ListBoxItem>
 
                     <ListBoxItem Name="DoctorsMenuItem">
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                             <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="24" Text="&#xE102;" />
-                            <TextBlock Text="Book tid" FontSize="8" Margin="0,0,0,0" />
+                            <TextBlock Text="Book tid" FontSize="8" Margin="0,0,0,0" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </ListBoxItem>
 

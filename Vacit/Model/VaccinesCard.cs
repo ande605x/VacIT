@@ -28,6 +28,8 @@ namespace Vacit.Model
 
         public string MonthAndYearsToTakeStringDanish { get; set; }
 
+        public string WhenToTakeStringDanish { get; set; }
+
         public string CardColor { get; set; }
 
         public string AgeIconFilename { get; set; }
@@ -35,7 +37,7 @@ namespace Vacit.Model
         public double AgeIconOpacity { get; set; }
 
 
-        public VaccinesCard(string vaccineName, int monthToTake, bool taken, bool genderGirl)
+        public VaccinesCard(string vaccineName, int monthToTake, bool taken, bool genderGirl, DateTime dateOfBirth)
         {
 
             this.MonthToTake = monthToTake;
@@ -43,6 +45,16 @@ namespace Vacit.Model
             this.Taken = taken;
 
             this.MonthAndYearsToTakeStringDanish = Converter.DateConverter.MonthsToYears(monthToTake);
+
+            if (taken) WhenToTakeStringDanish = "\nDu har markeret vaccine taget";
+            else
+            {
+                if (dateOfBirth.AddMonths(monthToTake) <= DateTime.Now)
+                    WhenToTakeStringDanish = "Vaccine skulle være taget for\n" + Converter.DateConverter.AgeToStringDanish(dateOfBirth.AddMonths(monthToTake)) + " siden";
+                else
+                    WhenToTakeStringDanish = "Vaccine skal tages om\n" + Converter.DateConverter.AgeToStringDanish(dateOfBirth.AddMonths(monthToTake));
+            }
+
 
 
 

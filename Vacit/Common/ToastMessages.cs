@@ -12,11 +12,10 @@ namespace Vacit.Common
     public class ToastMessages
     {
 
-        public DateTime standardScheduledTimeBefore1 { get; set; }
-        public DateTime standardScheduledTimeBefore2 { get; set; }
-        public DateTime standardScheduledTimeBefore3 { get; set; }
-        public DateTime scheduleTestTime { get; set; }
-
+        public static int standardScheduledDaysBefore1 { get; set; }
+        public static int standardScheduledDaysBefore2 { get; set; }
+        public static int standardScheduledDaysBefore3 { get; set; }
+        
 
 
 
@@ -41,10 +40,22 @@ namespace Vacit.Common
             ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToastTest);
 
             // NORMAL SCHEDULING:
-            // DateTime scheduledTime1 = DateTime.Now.AddSeconds(7);//vaccineTime - standardScheduledTimeBefore1;
-            // ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
-            // ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
-        }
+            standardScheduledDaysBefore1 = 14;
+            standardScheduledDaysBefore2 = 30;
+            standardScheduledDaysBefore3 = 45;
+            DateTime scheduledTime1 = vaccineTime.AddDays(-standardScheduledDaysBefore1);
+            DateTime scheduledTime2 = vaccineTime.AddDays(-standardScheduledDaysBefore2);
+            DateTime scheduledTime3 = vaccineTime.AddDays(-standardScheduledDaysBefore3);
+            ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
+            ScheduledToastNotification scheduledToast2 = new ScheduledToastNotification(toastXml, scheduledTime2);
+            ScheduledToastNotification scheduledToast3 = new ScheduledToastNotification(toastXml, scheduledTime3);
+            // Disabled during testing:
+            /*
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast2);
+            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast3);
+            */    
+    }
 
 
     }

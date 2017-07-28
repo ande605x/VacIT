@@ -220,6 +220,12 @@ namespace Vacit.Persistency
 
 
 
+
+
+
+
+
+
         const string urlVaccinesTaken = "api/VaccinesTakens";
 
         //GET VaccinesTaken
@@ -307,6 +313,32 @@ namespace Vacit.Persistency
         }
 
 
+
+
+        //DELETE VaccinesTaken
+        public static void DeleteVaccinesTakenJsonAsync(VaccinesTaken selectedVaccineTakenToDelete)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(serverUrl);
+                    client.DefaultRequestHeaders.Clear();
+                    string urlDeleteVT = urlVaccinesTaken + "?ChildID=" + selectedVaccineTakenToDelete.ChildID + "&VacMonthID=" + selectedVaccineTakenToDelete.VacMonthID;
+                  
+                    HttpResponseMessage response = client.DeleteAsync(urlDeleteVT).Result;
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        ShowMessages.ShowPopUp("Fejl. Vaccine taget blev ikke slettet fra databasen: " + response.StatusCode);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                ShowMessages.ShowPopUp("Fejl: " + e.Message);
+            }
+        }
 
 
 

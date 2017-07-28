@@ -25,45 +25,73 @@ namespace Vacit.Handler
         // HUSK TRY CATCH
         public void CreateChild()
         {
+           
 
-            VacitViewModel.IsBusy = true;
-
-
-            // Create rows in VaccinesTaken for the new child
-
-            foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+            try
             {
-                VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                VacitViewModel.IsBusy = true;
+
+                if (VacitViewModel.DateOfBirth > DateTime.Now)
+                    throw new ArgumentException("Fødselsdato valgt er i fremtiden. Vælg en anden dato!");
+                if (VacitViewModel.Name == null || VacitViewModel.Name == "" || VacitViewModel.Name.Contains(" "))
+                    throw new ArgumentException("Navn ikke indtastet eller indeholder mellemrum.");
+                 if (!VacitViewModel.GenderGirl && !VacitViewModel.GenderBoy)
+                    throw new ArgumentException("Kønnet ikke valgt.");
+
+
+
+                // Create rows in VaccinesTaken for the new child
+
+                foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
+                {
+
+                    // Find vaccinenames with contains the word "piger"
+                    var containsPiger = VaccinesListSingleton.Instance.VaccinesList.FirstOrDefault(x => x.VacName.Contains("piger"));
+                    // Test if boy and contains "piger" OR is a girl  
+                    if ((!VacitViewModel.GenderGirl && containsPiger.VacID != item.VacID || VacitViewModel.GenderGirl))
+                    {
+                        VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                            VacitViewModel.NextChildIDforView,
+                            item.VacMonthID); // VaccineTaken is false when creating new child
+
+
+                        VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+                    }
+                    //Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+
+                }
+
+
+          
+                // Create new child object
+                Child newChild = new Child(
                     VacitViewModel.NextChildIDforView,
-                    item.VacMonthID); // VaccineTaken is false when creating new child
+                    //ChildID is automaticly made by database on server 
+                    //VIRKER IKKE - ChildID locally needs to have the same number as on the server
+                    VacitViewModel.Name,
+                    DateConverter.DateTimeOffset_SetToDateTime(VacitViewModel.DateOfBirth),
+                    VacitViewModel.GenderGirl);
+
+                // Add to list             
+                VacitViewModel.ChildrensListSingleton.AddChild(newChild);
+         
 
 
-                VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
+                // Increment next ChildID and make it ready for next post
+                VacitViewModel.NextChildIDforView++;
 
-                //Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
-
+               
             }
 
+            catch (Exception ex)
+            {
+                ShowMessages.ShowPopUp("Nyt barn IKKE oprettet:\n" + ex.Message);
+            }
+            finally
+            {
+                VacitViewModel.IsBusy = false;
+            }
 
-
-            // Create new child object
-            Child newChild = new Child(
-                VacitViewModel.NextChildIDforView,
-                //ChildID is automaticly made by database on server 
-                //VIRKER IKKE - ChildID locally can needs to have the same number as on the server
-                VacitViewModel.Name,
-                DateConverter.DateTimeOffset_SetToDateTime(VacitViewModel.DateOfBirth),
-                VacitViewModel.GenderGirl);
-
-            // Add to list             
-            VacitViewModel.ChildrensListSingleton.AddChild(newChild);
-          
-
-            // Increment next ChildID and make it ready for next post
-            VacitViewModel.NextChildIDforView++;
-
-
-            VacitViewModel.IsBusy = false;
 
         } 
 
@@ -71,8 +99,8 @@ namespace Vacit.Handler
         public void DeleteChild()
         {
             VacitViewModel.ChildrensListSingleton.RemoveChild(VacitViewModel.SelectedChild);
-
-            // Husk slet vaccinestaken
+            // slet vaccine taken er inkluderet i ovenstående
+  
 
         }
 

@@ -118,9 +118,6 @@
     <Compile Include="View\AddChildView.xaml.cs">
       <DependentUpon>AddChildView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\BookingView.xaml.cs">
-      <DependentUpon>BookingView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\ChildView.xaml.cs">
       <DependentUpon>ChildView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\800px_COLOURBOX2722751.jpg" />
+    <Content Include="Assets\baby-vaccine.jpg" />
     <Content Include="Assets\beskyt_mod_vaccination.jpg" />
     <Content Include="Assets\Boy1.png" />
     <Content Include="Assets\Boy2.png" />
@@ -165,9 +163,12 @@
     <Content Include="Assets\Girl5.png" />
     <Content Include="Assets\Girl6.png" />
     <Content Include="Assets\Girl7.png" />
+    <Content Include="Assets\hinh-nen-em-be-de-thuong-25.jpg" />
     <Content Include="Assets\laegepraksisdk list for app.xml" />
     <Content Include="Assets\laeger.xml" />
     <Content Include="Assets\natur-børn.jpg" />
+    <Content Include="Assets\nature1.jpg" />
+    <Content Include="Assets\nature2.jfif" />
     <Content Include="Assets\RegionSjællandLogoTrans.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
@@ -184,10 +185,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\AddChildView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\BookingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

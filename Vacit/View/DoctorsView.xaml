@@ -11,9 +11,12 @@
         <ViewModel:VacitViewModel/>
     </Page.DataContext>
 
-    <Grid Background="Bisque">
-        
-<ListView x:Name="listView" HorizontalAlignment="Left" Height="555" Margin="55,90,0,0" VerticalAlignment="Top" Width="779" ItemsSource="{Binding DoctorsListSingleton.DoctorsList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+    <Grid Width="1224">
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="ms-appx:///Assets/hinh-nen-em-be-de-thuong-25.jpg"/>
+        </Grid.Background>
+
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="555" Margin="55,90,0,0" VerticalAlignment="Top" Width="779" ItemsSource="{Binding DoctorsListSingleton.DoctorsList, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Background="#66FFFFFF" SelectedItem="{Binding SelectedDoctor, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -30,22 +33,24 @@
 
 
                         </Grid.ColumnDefinitions>
-                         <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Praksisbetegnelse}" Foreground="Blue" FontSize="25"/>
-                        <TextBlock Grid.Row="0" Grid.Column="3" Text="Telefon: " Foreground="Blue" FontSize="15" VerticalAlignment="Center"/>
-                        <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding Telefonnr_1}" Foreground="Blue" FontSize="25"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Adresse}" Foreground="Black" FontSize="15"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Postnr}" Foreground="Black" FontSize="15"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Praksisbetegnelse}" FontWeight="Thin" Foreground="Blue" FontSize="25"/>
+                        <TextBlock Grid.Row="0" Grid.Column="3" Text="Telefon: " Foreground="Blue" FontWeight="Thin" FontSize="15" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding Telefonnr_1}" FontWeight="Thin" Foreground="Blue" FontSize="25"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Adresse}" FontWeight="Thin" Foreground="Black" FontSize="15"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Postnr}" FontWeight="Thin" Foreground="Black" FontSize="15"/>
                         <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Post_navn}" Foreground="Black" FontSize="15"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-           
+
             <Border x:Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
         </ListView>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="55,44,0,0" TextWrapping="Wrap" Text="Vis kun postnummer:" VerticalAlignment="Top" />
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="220,32,0,0" TextWrapping="Wrap" Text="{Binding DoctorsPostalCodeChosen, Mode=TwoWay}" VerticalAlignment="Top" Width="157"/>
+        <TextBlock x:Name="textBlock" FontWeight="Thin"  HorizontalAlignment="Left" Margin="59,662,0,0" TextWrapping="Wrap" Text="Vis kun postnummer:" VerticalAlignment="Top" Foreground="White" />
+        <TextBox x:Name="textBox" FontWeight="Thin" HorizontalAlignment="Left" Margin="197,650,0,0" TextWrapping="Wrap" Text="{Binding DoctorsPostalCodeChosen, Mode=TwoWay}" VerticalAlignment="Top" Width="157" Foreground="White"/>
         <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
-        <WebView HorizontalAlignment="Left" Height="200" Margin="952,210,0,0" VerticalAlignment="Top" Width="200" Source="http://www.aftalebogen.dk"/>
+        <WebView HorizontalAlignment="Left" Height="451" Margin="839,194,0,0" VerticalAlignment="Top" Width="375" Source="{Binding DoctorsSystemURL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Opacity="0.9"/>
+        <TextBlock x:Name="textBlock_Copy" FontSize="36" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="59,37,0,0" TextWrapping="Wrap" Text="Læger" VerticalAlignment="Top"/>
+        <TextBlock x:Name="textBlock_Copy1" FontSize="36" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="839,141,0,0" TextWrapping="Wrap" Text="Online booking" VerticalAlignment="Top"/>
 
     </Grid>
 </Page>

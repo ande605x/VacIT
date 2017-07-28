@@ -12,55 +12,37 @@
         <ViewModel:VacitViewModel/>
     </Page.DataContext>
 
-    <Grid>
+    <Grid Width="1224">
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF002295" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/nature1.jpg"/>
         </Grid.Background>
 
+
+
+
+
         <Image x:Name="RegionSjællandLogoTrans_png" Source="ms-appx:///Assets/RegionSjællandLogoTrans.png" Stretch="Fill" HorizontalAlignment="Right" Height="95" VerticalAlignment="Top" Width="179" Margin="0,46,46,0"/>
+        
+        <ComboBox x:Name="comboBox" FontSize="20" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top" Width="408" ItemsSource="{Binding VaccinesListSingleton.VaccinesList}" SelectedItem="{Binding SelectedVaccine, Mode=TwoWay}">
+        <ComboBox.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <TextBlock Text="{Binding VacName}" FontSize="20" FontWeight="Thin"/>
+                </Grid>
+            </DataTemplate>
+        </ComboBox.ItemTemplate>
+        </ComboBox>
 
 
 
-        <ListView x:Name="VaccinesListView" HorizontalAlignment="Left" Height="559" Margin="90,56,0,0" VerticalAlignment="Top" Width="920" ItemsSource="{Binding VaccinesListSingleton.VaccinesList}" Background="#33FFFFFF">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20*" />
-                            <ColumnDefinition Width="400" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding VacName}" Foreground="White" FontSize="20"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Beskrivelse" Foreground="White" FontSize="15"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding VacDescription}" Foreground="White" FontSize="15"/>
 
-                        <ListView Grid.Row="1" Grid.Column="2" x:Name="VaccinesWithMonthListView" ItemsSource="{Binding VaccinesListSingleton.VaccinesWithMonthList}" HorizontalAlignment="Left" Height="559" Margin="0,0,0,0" VerticalAlignment="Top" Width="521" Background="#33FFFFFF">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="100"></RowDefinition></Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="100"></ColumnDefinition></Grid.ColumnDefinitions>
-                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding MonthToTake}" Foreground="White" FontSize="25"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView> 
-                                  
-                    
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <Border x:Name="border" BorderBrush="Black" BorderThickness="1" Padding="5" Margin="5"/>
-        </ListView>
+
+        <TextBlock x:Name="textBlock" FontSize="36" FontWeight="Thin" Foreground="White" HorizontalAlignment="Left" Margin="10,17,0,0" TextWrapping="Wrap" Text="Vacciner" VerticalAlignment="Top"/>
+
+        
+        <WebView Source="{Binding SelectedVaccine.VacDescription}" Margin="10,132,246,10" Opacity="0.9" />
+     
+
 
 
     </Grid>

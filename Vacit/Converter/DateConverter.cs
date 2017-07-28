@@ -33,20 +33,7 @@ namespace Vacit.Converter
         {
             var age = DateTimeOffset.Now - birthdate;
 
-
-
-            //if (age.Days < 31)
-            //{
-            //    if (age.Days == 1) return "1 dag";
-            //    else return age.Days + " dage";
-            //}
-            //else if (age.Days < 366) //Rounded up to not display days
-            //{
-            //    if (age.Days/30==1) return "1 måned "+age.Days%30+" dage";
-            //    return age.Days / 30 + " måneder";
-            //    //if (age.Days%30==0) return age.Days / 30 + " måneder";
-            //    //else return age.Days / 30 + " måneder " + age.Days % 30 + " dage";
-            //}
+            if (age.Days < 0) age = -age; // For WhenToTakeStringDanish in VaccineCards calculation
 
             if (age.Days < 14)
             {
@@ -57,20 +44,20 @@ namespace Vacit.Converter
             {
                 return age.Days / 7 + " uger";
             }
-            else if (age.Days < 366) //Rounded up to not display days
+            else if (age.Days < 366-30) //Rounded up to not display days
             {
-                
-                return age.Days / 30 + " måneder";
-                //if (age.Days%30==0) return age.Days / 30 + " måneder";
-                //else return age.Days / 30 + " måneder " + age.Days % 30 + " dage";
+                if (age.Days/30 == 1) return age.Days / 30 + " måned";
+                else return age.Days / 30 + " måneder";
             }
             else
             {
                 if ((age.Days % 365) == 0) return age.Days / 365 + " år";
-                else return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder";
-                //    if ((age.Days % 365) % 30 == 0) return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder";
-                //    else return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder " + (age.Days % 365) % 30 + " dage";
-                //
+                else if (age.Days % 365 > 365 - 30) return (age.Days / 365) + 1 + " år";
+                else
+                {
+                    if ((age.Days % 365) / 30 == 0) return age.Days / 365 + " år";
+                    else return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder";
+                }
             }
         }
     }
