@@ -198,15 +198,18 @@ namespace Vacit.ViewModel
 
 
         //MIDLERTIDIG
-        private int nextChildIDforView;
+        //private int nextChildIDforView;
 
-        public int NextChildIDforView
-        {
-            get { return nextChildIDforView; }
-            set { nextChildIDforView = value; }// OnPropertyChanged(nameof(Name)); }
-        }
+        //public int NextChildIDforView
+        //{
+        //    get { return nextChildIDforView; }
+        //    set { nextChildIDforView = value; }// OnPropertyChanged(nameof(Name)); }
+        //}
 
 
+
+
+        public int nextChildID2 { get; set; }
 
 
 
@@ -278,7 +281,7 @@ namespace Vacit.ViewModel
             VaccinesListSingleton = VaccinesListSingleton.Instance;
             DoctorsListSingleton = DoctorsListSingleton.Instance;
 
-            NextChildIDforView = ChildrensListSingleton.NextChildID;
+            //NextChildIDforView = ChildrensListSingleton.NextChildID;
             //ChildID = ChildrensListSingleton.NextChildID;
 
             ChildHandler = new Handler.ChildHandler(this);

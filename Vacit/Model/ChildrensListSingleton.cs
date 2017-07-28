@@ -45,18 +45,18 @@ namespace Vacit.Model
 
 
 
-        private int nextChildID;
+        //private int nextChildID;
 
-        public int NextChildID
-        {
-            get { return nextChildID; }
-            set { nextChildID = value; }
-        }
-
-
-        public int lastChildID { get; set; }
+        //public int NextChildID
+        //{
+        //    get { return nextChildID; }
+        //    set { nextChildID = value; }
+        //}
 
 
+
+        
+        public int nextChildID2B { get; set; }
 
 
         public CardList CardListForView { get; set; }
@@ -85,16 +85,16 @@ namespace Vacit.Model
             // Get list from database from server
             GetChildren();
 
-            lastChildID = childrensList.LastOrDefault().ChildID;
+            //lastChildID = childrensList.LastOrDefault().ChildID;
 
             //nextChildID= ChildrensList.Last().ChildID+1;
 
             // Find ChildID for the next new child (last ChildID+1)  (This only run once when app opens)
-            foreach (var i in childrensList)
-            {
-                nextChildID = i.ChildID;
-            }
-            nextChildID++;
+            //foreach (var i in childrensList)
+            //{
+            //    nextChildID = i.ChildID;
+            //}
+            //nextChildID++;
 
         }
 
@@ -109,11 +109,12 @@ namespace Vacit.Model
 
         public void AddChild(Child newChild)
         {
+            nextChildID2B = newChild.ChildID;
+
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
 
-            
-
+    
             foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             {
                 // Find vaccinenames with contains the word "piger"
@@ -122,7 +123,7 @@ namespace Vacit.Model
                 if ((!newChild.GenderGirl && containsPiger.VacID != item.VacID || newChild.GenderGirl))
                 {
                     VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-                   NextChildID,
+                   nextChildID2B,//NextChildID,
                    item.VacMonthID);
 
                     Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
@@ -156,7 +157,7 @@ namespace Vacit.Model
             }
     
 
-            nextChildID++;                                     // Increment nextChildID
+            //nextChildID++;                                     // Increment nextChildID
         }
 
         public void RemoveChild(Child childToRemove)

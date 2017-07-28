@@ -39,9 +39,20 @@ namespace Vacit.Handler
                     throw new ArgumentException("Kønnet ikke valgt.");
 
 
+                // Because childID is sql identity auto increment:
+                // To get next child ID by adding dummy child and deleting it again
+                // Next Child ID will then by the dummy childID + 1
+                Persistency.PersistencyService.SaveChildAsJsonAsync(new Child(0,"Dummy",DateTime.Now,false));
+                var childrensDummyList = Persistency.PersistencyService.LoadChildrenFromJsonAsync();
+                var dummyChild = childrensDummyList.FirstOrDefault(x => x.Name.Contains("Dummy"));
+                Persistency.PersistencyService.DeleteChildFromJsonAsync(dummyChild);
+                VacitViewModel.nextChildID2 = dummyChild.ChildID + 1;
+                // Remarks: This way every second child ID is deleted and falls out of the list, but it was the only way I could solve the identity problem.
+                //          It is also not suited for multiple users if another user makes a record after me getting the ID and before I make my record in the list. 
+
+
 
                 // Create rows in VaccinesTaken for the new child
-
                 foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
                 {
 
@@ -51,7 +62,7 @@ namespace Vacit.Handler
                     if ((!VacitViewModel.GenderGirl && containsPiger.VacID != item.VacID || VacitViewModel.GenderGirl))
                     {
                         VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-                            VacitViewModel.NextChildIDforView,
+                            VacitViewModel.nextChildID2,//VacitViewModel.NextChildIDforView,
                             item.VacMonthID); // VaccineTaken is false when creating new child
 
 
@@ -65,7 +76,7 @@ namespace Vacit.Handler
           
                 // Create new child object
                 Child newChild = new Child(
-                    VacitViewModel.NextChildIDforView,
+                    VacitViewModel.nextChildID2,//VacitViewModel.NextChildIDforView,
                     //ChildID is automaticly made by database on server 
                     //VIRKER IKKE - ChildID locally needs to have the same number as on the server
                     VacitViewModel.Name,
@@ -78,7 +89,7 @@ namespace Vacit.Handler
 
 
                 // Increment next ChildID and make it ready for next post
-                VacitViewModel.NextChildIDforView++;
+                // VacitViewModel.NextChildIDforView++;
 
                
             }
