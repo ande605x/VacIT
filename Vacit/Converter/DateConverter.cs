@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Vacit.Converter
 {
     public class DateConverter
@@ -40,23 +41,24 @@ namespace Vacit.Converter
                 if (age.Days == 1) return "1 dag";
                 else return age.Days + " dage";
             }
-            else if (age.Days<60)
+            else if (age.Days<60)                                                             // if lees than 2 months
             {
-                return age.Days / 7 + " uger";
+                return age.Days / 7 + " uger"; //Rounded up to not display days
             }
-            else if (age.Days < 366-30) //Rounded up to not display days
-            {
-                if (age.Days/30 == 1) return age.Days / 30 + " måned";
-                else return age.Days / 30 + " måneder";
+            else if (age.Days < 366-30)                                                       // if less than 11 months
+            {               
+                return age.Days / 30 + " måneder";                                            
             }
             else
             {
-                if ((age.Days % 365) == 0) return age.Days / 365 + " år";
-                else if (age.Days % 365 > 365 - 30) return (age.Days / 365) + 1 + " år";
+                if ((age.Days % 365) == 0) return age.Days / 365 + " år";                     // if excatly whole years
+                else if (age.Days % 365 > 365 - 30) return (age.Days / 365) + 1 + " år";      // if years + 11-12 months: rounded up to whole years
                 else
                 {
-                    if ((age.Days % 365) / 30 == 0) return age.Days / 365 + " år";
-                    else return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder";
+                    if ((age.Days % 365) / 30 == 0)                                           // prevent XX years 0 months 
+                        return age.Days / 365 + " år";
+                    else 
+                        return age.Days / 365 + " år " + (age.Days % 365) / 30 + " måneder"; 
                 }
             }
         }

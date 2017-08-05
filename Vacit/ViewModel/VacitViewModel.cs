@@ -33,7 +33,7 @@ namespace Vacit.ViewModel
 
 
         //Add Child Properties
-        private int childID;              // HVOR FÅR DEN ID FRA??????
+        private int childID;            
         public int ChildID
         {
             get { return childID; }
