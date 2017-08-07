@@ -22,15 +22,10 @@ namespace Vacit.Handler
 
 
 
-        // HUSK TRY CATCH
         public void CreateChild()
         {
-           
-
             try
-            {
-                VacitViewModel.IsBusy = true;
-
+            { 
                 if (VacitViewModel.DateOfBirth > DateTime.Now)
                     throw new ArgumentException("Fødselsdato valgt er i fremtiden. Vælg en anden dato!");
                 if (VacitViewModel.Name == null || VacitViewModel.Name == "" || VacitViewModel.Name.Contains(" "))
@@ -46,7 +41,7 @@ namespace Vacit.Handler
                 var childrensDummyList = Persistency.PersistencyService.LoadChildrenFromJsonAsync();
                 var dummyChild = childrensDummyList.FirstOrDefault(x => x.Name.Contains("Dummy"));
                 Persistency.PersistencyService.DeleteChildFromJsonAsync(dummyChild);
-                VacitViewModel.nextChildID2 = dummyChild.ChildID + 1;
+                VacitViewModel.nextChildID = dummyChild.ChildID + 1;
                 // Remarks: This way every second child ID is deleted and falls out of the list, but it was the only way I could solve the identity problem.
                 //          It is also not suited for multiple users if another user makes a record after me getting the ID and before I make my record in the list. 
 
@@ -62,45 +57,31 @@ namespace Vacit.Handler
                     if ((!VacitViewModel.GenderGirl && containsPiger.VacID != item.VacID || VacitViewModel.GenderGirl))
                     {
                         VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-                            VacitViewModel.nextChildID2,//VacitViewModel.NextChildIDforView,
+                            VacitViewModel.nextChildID,
                             item.VacMonthID); // VaccineTaken is false when creating new child
-
 
                         VaccinesListSingleton.Instance.VaccinesTakenList.Add(newVaccinesTaken);
                     }
-                    //Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
-
                 }
 
 
-          
+
                 // Create new child object
                 Child newChild = new Child(
-                    VacitViewModel.nextChildID2,//VacitViewModel.NextChildIDforView,
-                    //ChildID is automaticly made by database on server 
-                    //VIRKER IKKE - ChildID locally needs to have the same number as on the server
+                    VacitViewModel.nextChildID,  //ChildID is in fact automaticly made by database on server 
                     VacitViewModel.Name,
                     DateConverter.DateTimeOffset_SetToDateTime(VacitViewModel.DateOfBirth),
                     VacitViewModel.GenderGirl);
 
                 // Add to list             
-                VacitViewModel.ChildrensListSingleton.AddChild(newChild);
-         
-
-
-                // Increment next ChildID and make it ready for next post
-                // VacitViewModel.NextChildIDforView++;
-
-               
+                VacitViewModel.ChildrensListSingleton.AddChild(newChild);         
             }
-
             catch (Exception ex)
             {
                 ShowMessages.ShowPopUp("Nyt barn IKKE oprettet:\n" + ex.Message);
             }
             finally
             {
-                VacitViewModel.IsBusy = false;
             }
 
 
@@ -110,40 +91,15 @@ namespace Vacit.Handler
         public void DeleteChild()
         {
             VacitViewModel.ChildrensListSingleton.RemoveChild(VacitViewModel.SelectedChild);
-            // slet vaccine taken er inkluderet i ovenstående
-  
-
         }
 
-        public void UpdateChild()
-        {
-            VacitViewModel.ChildrensListSingleton.UpdateChild(VacitViewModel.SelectedChild);
-        }
-
+ 
 
 
 
         public void UpdateDoctorsList()
         {
             VacitViewModel.DoctorsListSingleton.TrimListByPostalCode(VacitViewModel.DoctorsPostalCodeChosen);
-        }
-
-
-
-        public void UpdateFromButton()
-        {
-            foreach (var item in VacitViewModel.SelectedChild.VaccinesCardList)
-            {
-
-                int indx = VacitViewModel.SelectedChild.VaccinesCardList.IndexOf(item);
-                VacitViewModel.ChildrensListSingleton.UpdateVaccineTaken(item,indx,VacitViewModel.SelectedChild.ChildID);
-                                                                         
-                var tempCard = item;
-                VacitViewModel.SelectedChild.VaccinesCardList.RemoveAt(indx);//VacitViewModel.SelectedVaccineCard);
-                                                                             //if (tempCard.Taken) tempCard.Taken = false; else tempCard.Taken = true;
-                VacitViewModel.SelectedChild.VaccinesCardList.Insert(indx, tempCard);
-            }
-
         }
 
 
@@ -157,15 +113,8 @@ namespace Vacit.Handler
                                                                      VacitViewModel.SelectedChild.ChildID
                                                                      );
             var tempCard = VacitViewModel.SelectedVaccineCard;
-            VacitViewModel.SelectedChild.VaccinesCardList.RemoveAt(indx);//VacitViewModel.SelectedVaccineCard);
-            //if (tempCard.Taken) tempCard.Taken = false; else tempCard.Taken = true;
+            VacitViewModel.SelectedChild.VaccinesCardList.RemoveAt(indx);
             VacitViewModel.SelectedChild.VaccinesCardList.Insert(indx, tempCard);
-
-
-            
-            //VacitViewModel.SelectedVaccineCard.Taken = false;
-            //VacitViewModel.SelectedChild.VaccinesCardList[indx]= VacitViewModel.SelectedVaccineCard;
-            //VacitViewModel.SelectedChild.VaccinesCardList.Remove(VacitViewModel.SelectedVaccineCard);
         }
 
     }

@@ -45,23 +45,12 @@ namespace Vacit.Model
 
 
 
-        //private int nextChildID;
-
-        //public int NextChildID
-        //{
-        //    get { return nextChildID; }
-        //    set { nextChildID = value; }
-        //}
-
 
 
         
-        public int nextChildID2B { get; set; }
+        public int nextChildID2 { get; set; }
 
-
-        public CardList CardListForView { get; set; }
-
-
+        
 
 
 
@@ -78,24 +67,8 @@ namespace Vacit.Model
             ChildrensList = new ObservableCollection<Child>();
             ps = new PersistencyService();
 
-                //Testdata
-                //ChildrensList.Add(new Child("Anna",System.DateTime.Now, true));
-                //ChildrensList.Add(new Child("Jens", System.DateTime.Now, false));
-
             // Get list from database from server
             GetChildren();
-
-            //lastChildID = childrensList.LastOrDefault().ChildID;
-
-            //nextChildID= ChildrensList.Last().ChildID+1;
-
-            // Find ChildID for the next new child (last ChildID+1)  (This only run once when app opens)
-            //foreach (var i in childrensList)
-            //{
-            //    nextChildID = i.ChildID;
-            //}
-            //nextChildID++;
-
         }
 
 
@@ -109,12 +82,13 @@ namespace Vacit.Model
 
         public void AddChild(Child newChild)
         {
-            nextChildID2B = newChild.ChildID;
+            nextChildID2 = newChild.ChildID;
 
             ChildrensList.Add(newChild);                       // Add child locally
             PersistencyService.SaveChildAsJsonAsync(newChild); // Add child to server
 
-    
+
+            // Create rows in VaccinesTaken for the new child
             foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             {
                 // Find vaccinenames with contains the word "piger"
@@ -122,11 +96,11 @@ namespace Vacit.Model
                 // Test if boy and contains "piger" OR is a girl  
                 if ((!newChild.GenderGirl && containsPiger.VacID != item.VacID || newChild.GenderGirl))
                 {
-                    VaccinesTaken newVaccinesTaken = new VaccinesTaken(
-                   nextChildID2B,//NextChildID,
-                   item.VacMonthID);
+                   VaccinesTaken newVaccinesTaken = new VaccinesTaken(
+                   nextChildID2,
+                   item.VacMonthID); // VaccineTaken is false when creating new child
 
-                    Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
+                   Persistency.PersistencyService.SaveVaccinesTakenAsJsonAsync(newVaccinesTaken);
                 }
 
             }
@@ -147,18 +121,15 @@ namespace Vacit.Model
                     if (vacTime >= DateTime.Now)  // Only notify if date is after present time
                     {
                         ToastMessages.CreateToastMessage("Husk at booke tid til vaccination:",
-                                                         newChild.Name + " skal vaccineres senest " + Vacit.Converter.DateConverter.DateStringDanish(vacTime),       //+ " er " + newChild.AgeStringDanish + " gammel, og derfor er der " + " til",
+                                                         newChild.Name + " skal vaccineres senest " + Vacit.Converter.DateConverter.DateStringDanish(vacTime),
                                                          "Vaccine: " + vwmlItem.VacName,
                                                          @"C:\SOURCE\Vacit\Vacit\Assets\beskyt_mod_vaccination.jpg",
                                                          vacTime);
                     }
                 }
-
-            }
-    
-
-            //nextChildID++;                                     // Increment nextChildID
+            }                
         }
+
 
         public void RemoveChild(Child childToRemove)
         {
@@ -177,17 +148,9 @@ namespace Vacit.Model
 
             ChildrensList.Remove(childToRemove);                        // Delete child locally
             PersistencyService.DeleteChildFromJsonAsync(childToRemove); // Delete child from server
-        
 
-            // husk fjern ToastMessages
+            // Missing: Removeing ToastMessages here
 
-
-        }
-
-        public void UpdateChild(Child childToUpdate)
-        {
-            ChildrensList.Clear();  // Clear list ????????????
-            PersistencyService.UpdateChildJsonAsync(childToUpdate);
         }
 
 
@@ -209,18 +172,11 @@ namespace Vacit.Model
             // Using lambda expression to find VaccineTaken with the composite keys
             var foundTaken = VaccinesListSingleton.Instance.VaccinesTakenList.FirstOrDefault(x=>x.ChildID == childIDKey && x.VacMonthID==vacMonthIDKey);
 
-            if (true)//foundTaken != null)
-            {
-                if (foundTaken.VacTaken) foundTaken.VacTaken = false;
-                else foundTaken.VacTaken = true;
-            }
-            //VaccinesListSingleton.Instance.VaccinesTakenList.CollectionChanged += VaccinesTakenList_CollectionChanged;
-
-            
-
+            if (foundTaken.VacTaken) foundTaken.VacTaken = false;
+            else foundTaken.VacTaken = true;
+                        
             if (vaccineCardToUpdate.Taken) vaccineCardToUpdate.Taken = false;
             else vaccineCardToUpdate.Taken = true;
-
 
 
 
@@ -261,10 +217,6 @@ namespace Vacit.Model
                     vaccineCardToUpdate.WhenToTakeStringDanish = "Vaccine skal tages om\n" + Converter.DateConverter.AgeToStringDanish(dateOfBirth.AddMonths(monthToTake));
             }
 
-
-
-
-            //VaccinesListSingleton.Instance.VaccinesCardList.Insert(vaccineCardToUpdateIndex,vaccineCardToUpdate);
 
 
 

@@ -28,7 +28,7 @@ namespace Vacit.Common
             toastStringElements[1].AppendChild(toastXml.CreateTextNode(line2));
             toastStringElements[2].AppendChild(toastXml.CreateTextNode(line3));
 
-            String imagePath = "file:///" + imageFilename;// Path.GetFullPath(imageFilename);
+            String imagePath = "file:///" + imageFilename;
             XmlNodeList toastImageElements = toastXml.GetElementsByTagName("image");
             toastImageElements[0].Attributes[1].NodeValue = imagePath;
 

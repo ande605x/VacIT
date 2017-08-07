@@ -8,7 +8,7 @@ namespace Vacit.Model
     public class Child
     {
 
-
+        // Properties from database
         public int ChildID { get; set; }
         public string Name { get; set; }
         public DateTime DateOfBirth { get; set; }
@@ -16,7 +16,7 @@ namespace Vacit.Model
 
 
 
-
+        // Properties calculated
         public string GenderColor { get; set; }
 
         public string DateOfBirthStringDanish { get; set; }
@@ -25,12 +25,9 @@ namespace Vacit.Model
 
 
 
-        public CardList CardListForView { get; set; }
-
-
-
+       
+        // Making one VaccinesCardList for every child
         private ObservableCollection<VaccinesCard> vaccinesCardList;
-
         public ObservableCollection<VaccinesCard> VaccinesCardList
         {
             get { return vaccinesCardList; }
@@ -39,9 +36,6 @@ namespace Vacit.Model
 
 
 
-
-
-        // er der brug for ToString metode?? se martins HotelAppGuestWin10
 
 
 
@@ -62,7 +56,7 @@ namespace Vacit.Model
 
 
 
-            // LINQ combinding 3 lists
+            // LINQ combinding 3 lists, making the cards in ChildView where we need the 3 propetiers: vaccineName, monthToTake and taken
             var cardList = from vt in VaccinesListSingleton.Instance.VaccinesTakenList
                            join vwm in VaccinesListSingleton.Instance.MonthToTakeVaccinesList
                            on vt.VacMonthID equals vwm.VacMonthID
@@ -72,17 +66,12 @@ namespace Vacit.Model
                            orderby vwm.MonthToTake
                            select new {vaccineName=v.VacName, monthToTake = vwm.MonthToTake, taken = vt.VacTaken };
 
-            CardListForView = new CardList();
             VaccinesCardList = new ObservableCollection<VaccinesCard>();
-         
 
             foreach (var item in cardList)
             {
-                  VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, item.taken, genderGirl, dateOfBirth));
+                VaccinesCardList.Add(new VaccinesCard(item.vaccineName, item.monthToTake, item.taken, genderGirl, dateOfBirth));
             }
-
-            
-
         }
     }
 }

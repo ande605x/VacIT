@@ -7,7 +7,7 @@ namespace Vacit.Model
     {
         public int ChildID { get; set; }
         public int VacMonthID { get; set; }
-        public bool VacTaken { get; set; }   // tidligere "bool?"
+        public bool VacTaken { get; set; }  
 
         public VaccinesTaken(int childID, int vacMonthID)
         {

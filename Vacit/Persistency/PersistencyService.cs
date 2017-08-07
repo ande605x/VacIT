@@ -108,36 +108,6 @@ namespace Vacit.Persistency
 
 
 
-        // PUT Child
-        public static void UpdateChildJsonAsync(Child selectedChildToUpdate)
-        {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(serverUrl);
-                    client.DefaultRequestHeaders.Clear();
-                    string urlUpdate = urlChildren + selectedChildToUpdate.ChildID;
-
-                    HttpResponseMessage response = client.PutAsJsonAsync<Child>(urlUpdate,selectedChildToUpdate).Result;
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        ShowMessages.ShowPopUp("Fejl. Barnet blev ikke opdateret i databasen: " + response.StatusCode);
-                    }
-                    else
-                    {
-                        ShowMessages.ShowPopUp("Barnet er nu opdateret i databasen");
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                ShowMessages.ShowPopUp("Fejl: " + e.Message);
-            }
-        }
-
-
 
 
 
@@ -192,7 +162,7 @@ namespace Vacit.Persistency
         
         const string urlVaccinesWithMonth = "api/VaccinesWithMonthsViews/";
 
-        //GET VaccinesWithMonths
+        //GET VaccinesWithMonths (Database VIEW)
         public static ObservableCollection<VaccinesWithMonths> LoadVaccinesWithMonthsFromJsonAsync()
         {
             try

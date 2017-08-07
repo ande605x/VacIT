@@ -101,8 +101,6 @@
     <Compile Include="Common\ToastMessages.cs" />
     <Compile Include="Converter\DateConverter.cs" />
     <Compile Include="Handler\ChildHandler.cs" />
-    <Compile Include="Handler\VaccineHandler.cs" />
-    <Compile Include="Model\CardList.cs" />
     <Compile Include="Model\Child.cs" />
     <Compile Include="Model\Doctors.cs" />
     <Compile Include="Model\DoctorsListSingleton.cs" />

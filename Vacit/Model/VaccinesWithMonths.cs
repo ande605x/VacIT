@@ -7,12 +7,10 @@ namespace Vacit
     {
       
         public int VacID { get; set; }
-
        
         public string VacName { get; set; }
 
         public string VacDescription { get; set; }
-
        
         public int MonthToTake { get; set; }
 

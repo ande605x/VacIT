@@ -9,17 +9,7 @@ namespace Vacit.Model
     public class VaccinesCard
     {
 
-        //public string ChildI { get; set; }
-
-        //public string AgeIconFilename { get; set; }
-
-        //public int CardColor { get; set; }
-
-        //public int VaccineID { get; set; }
-
-        //public int VacMonthID { get; set; }
-
-
+    
 
         public string VaccineName { get; set; }
         public int MonthToTake { get; set; }

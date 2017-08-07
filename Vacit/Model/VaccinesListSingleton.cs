@@ -32,8 +32,11 @@ namespace Vacit.Model
             set { vaccinesList = value; }
         }
 
-        private ObservableCollection<VaccinesWithMonths> vaccinesWithMonthList;
 
+
+
+        // This coming from a database view
+        private ObservableCollection<VaccinesWithMonths> vaccinesWithMonthList;
         public ObservableCollection<VaccinesWithMonths> VaccinesWithMonthList
         {
             get { return vaccinesWithMonthList; }
@@ -97,21 +100,11 @@ namespace Vacit.Model
         // Metoder
         public void GetVaccines()
         {
-            vaccinesList = PersistencyService.LoadVaccinesFromJsonAsync();   // SKAL BEGGE BRUGES????
+            vaccinesList = PersistencyService.LoadVaccinesFromJsonAsync();
             vaccinesWithMonthList = PersistencyService.LoadVaccinesWithMonthsFromJsonAsync();
-
             monthToTakeVaccinesList = PersistencyService.LoadMonthToTakeVaccineFromJsonAsync();
             vaccinesTakenList = PersistencyService.LoadVaccinesTakenFromJsonAsync();
-
-
-
-
-
         }
-
-
-        
-        
 
     }
 }

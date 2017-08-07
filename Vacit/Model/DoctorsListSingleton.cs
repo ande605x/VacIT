@@ -37,6 +37,18 @@ namespace Vacit.Model
 
 
 
+ 
+
+        // Entire doctorslist of all doctors in Denmark
+        private ObservableCollection<Doctors> doctorsListTotal;
+        public ObservableCollection<Doctors> DoctorsListTotal
+        {
+            get { return doctorsListTotal; }
+            set { doctorsListTotal = value; }
+        }
+
+
+        // List only doctors by chosen postalcode, if none chosen then list all
         private ObservableCollection<Doctors> doctorsList;
         public ObservableCollection<Doctors> DoctorsList
         {
@@ -45,13 +57,7 @@ namespace Vacit.Model
         }
 
 
-        private ObservableCollection<Doctors> doctorsListTotal;
 
-        public ObservableCollection<Doctors> DoctorsListTotal
-        {
-            get { return doctorsListTotal; }
-            set { doctorsListTotal = value; }
-        }
 
 
 
@@ -62,13 +68,13 @@ namespace Vacit.Model
 
             GetDoctors();
 
-            //sorter - Tager for lang tid!!!
+            //Sort the list alfabetically - takes too long time!!!
             //SortDoctors();
 
-            doctorsList = doctorsListTotal;
-            
-
+            doctorsList = doctorsListTotal;            
         }
+
+
 
         private void GetDoctors()
         {
@@ -84,7 +90,7 @@ namespace Vacit.Model
         public void TrimListByPostalCode(int PostalCode)
         {
              DoctorsList = new ObservableCollection<Doctors>(doctorsListTotal.Where(x=>x.Postnr==PostalCode));
-            DoctorsList.Add(new Doctors { navn="test"});
+            
         }
     }
 }
