@@ -55,7 +55,6 @@ namespace Vacit.Model
 
 
 
-
             // LINQ combinding 3 lists, making the cards in ChildView where we need the 3 propetiers: vaccineName, monthToTake and taken
             var cardList = from vt in VaccinesListSingleton.Instance.VaccinesTakenList
                            join vwm in VaccinesListSingleton.Instance.MonthToTakeVaccinesList

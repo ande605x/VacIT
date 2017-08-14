@@ -47,7 +47,7 @@ namespace Vacit.Converter
             }
             else if (age.Days < 366-30)                                                       // if less than 11 months
             {               
-                return age.Days / 30 + " måneder";                                            
+                return age.Days / 30 + " måneder";                                            // only rounded down. Don't show 3 months before the child is 3 months or more
             }
             else
             {

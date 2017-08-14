@@ -91,7 +91,7 @@ namespace Vacit.Model
             // Create rows in VaccinesTaken for the new child
             foreach (var item in VaccinesListSingleton.Instance.MonthToTakeVaccinesList)
             {
-                // Find vaccinenames with contains the word "piger"
+                // Find vaccinenames with contains the word "piger" using predicate
                 var containsPiger = VaccinesListSingleton.Instance.VaccinesList.FirstOrDefault(x => x.VacName.Contains("piger"));
                 // Test if boy and contains "piger" OR is a girl  
                 if ((!newChild.GenderGirl && containsPiger.VacID != item.VacID || newChild.GenderGirl))
