@@ -46,15 +46,18 @@ namespace Vacit.Common
             DateTime scheduledTime1 = vaccineTime.AddDays(-standardScheduledDaysBefore1);
             DateTime scheduledTime2 = vaccineTime.AddDays(-standardScheduledDaysBefore2);
             DateTime scheduledTime3 = vaccineTime.AddDays(-standardScheduledDaysBefore3);
-            ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
-            ScheduledToastNotification scheduledToast2 = new ScheduledToastNotification(toastXml, scheduledTime2);
-            ScheduledToastNotification scheduledToast3 = new ScheduledToastNotification(toastXml, scheduledTime3);
-            // Disabled during testing:
-            /*
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast2);
-            ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast3);
-            */    
+            if (scheduledTime1 >= DateTime.Now && scheduledTime2 >= DateTime.Now && scheduledTime3 >= DateTime.Now)  // Only notify if date is after present time
+            {
+                ScheduledToastNotification scheduledToast1 = new ScheduledToastNotification(toastXml, scheduledTime1);
+                ScheduledToastNotification scheduledToast2 = new ScheduledToastNotification(toastXml, scheduledTime2);
+                ScheduledToastNotification scheduledToast3 = new ScheduledToastNotification(toastXml, scheduledTime3);
+                // Disabled during testing:
+                /*
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast1);
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast2);
+                ToastNotificationManager.CreateToastNotifier().AddToSchedule(scheduledToast3);
+                */
+            }    
     }
 
 

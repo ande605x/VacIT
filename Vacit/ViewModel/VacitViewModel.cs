@@ -221,7 +221,6 @@ namespace Vacit.ViewModel
             LastChangedCard = null;
             
            
-            // HUSK TJEK RELAYCOMMAND FOR EMTY LIST OGSÅ. Tjek Eventmaker_01
             CreateChildCommand = new RelayCommand(ChildHandler.CreateChild);
             DeleteChildCommand = new RelayCommand(ChildHandler.DeleteChild,IsChildListNotEmpty);
      
